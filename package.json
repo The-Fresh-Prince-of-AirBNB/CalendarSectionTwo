@@ -1,0 +1,26 @@
+{
+  "name": "fec-reservation-calendar",
+  "version": "1.0.0",
+  "description": "reservation calendar for an airbnb clone item detail page",
+  "main": "index.js",
+  "scripts": {
+    "react-dev": "webpack -d --watch",
+    "start": "nodemon server/app.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "axios": "^0.21.0",
+    "express": "^4.15.0",
+    "mongoose": "^5.10.11",
+    "morgan": "1.9.1",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  }
+}

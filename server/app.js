@@ -2,6 +2,7 @@ const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
 const router = require('./routes.js');
+
 const db = require('../db/mongo/db.js');
 
 const app = express();

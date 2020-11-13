@@ -1,14 +1,14 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var reservationSchema = mongoose.Schema({
+const reservationSchema = mongoose.Schema({
   booked: [String],
   adults: Number,
   children: Number,
   infants: Number,
-  totalCost: Number
+  totalCost: Number,
 });
 
-var listingSchema = mongoose.Schema({
+const listingSchema = mongoose.Schema({
   id: Number,
   nightlyFee: Number,
   cleaningFee: Number,
@@ -16,7 +16,7 @@ var listingSchema = mongoose.Schema({
   taxes: Number,
   minNights: Number,
   rareFind: Boolean,
-  reservations: [reservationSchema]
+  reservations: [reservationSchema],
 });
 
 module.exports = mongoose.model('ListingModel', listingSchema);

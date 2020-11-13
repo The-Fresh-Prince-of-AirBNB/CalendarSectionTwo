@@ -15,7 +15,7 @@ module.exports = {
   },
 
   makeReservation: (find, callback) => {
-    console.log(find, callback);
+    console.log(find);
   },
 
   addListing: (listing, i, callback) => {

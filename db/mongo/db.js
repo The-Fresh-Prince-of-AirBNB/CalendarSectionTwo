@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/reservations');
 
 const db = mongoose.connection;
 
 db.on('error', console.error.bind('console', 'connection error to database'));
-db.once('open', err => {
+db.once('open', (err) => {
   if (err) {
     console.log('not connected to mongo');
   } else {
@@ -13,4 +13,4 @@ db.once('open', err => {
   }
 });
 
-module.exports = db
+module.exports = db;

@@ -1,49 +1,182 @@
+@import "compass/css3";
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 /*
+  Box Styling
   ==============================================
+*/
+
+.box {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+  margin-right: 5%;
+  width: 22%;
+  padding: 24px;
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  border-radius: 12px;
+}
+
+.nightlyFee {
+  margin-bottom: 24px;
+}
+
+/*
+  Form Styling
+  ==============================================
+*/
+
+.form {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 8px;
+  width: 100%
+}
+
+.check {
+  display: flex;
+  border: none;
+  background: none;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.checkIn {
+  padding: 10px;
+  border-right: 1px solid rgb(221, 221, 221);
+  width: 49%;
+  white-space: nowrap
+}
+
+.checkOut {
+  padding: 10px;
+  width: 49%;
+  white-space: nowrap;
+}
+
+.guestBut {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.checkAvailability {
+  margin-top: 16px;
+  width: 100%;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+/*
   Popups/Modals
   ==============================================
 */
 
+
 /* Calendar */
 .calendar {
   position: fixed;
-  background-color: antiquewhite;
-  width: 200px;
-  height: 100px;
-  top: 0;
-  left: 50px;
+  background-color: rgb(255, 255, 255);
+  top: 100px;
+  right: 5%;
+  border-radius: 8px;
+  padding: 23px 30px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
 .calendarContent {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: wrap;
   position: relative;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
   height: auto;
+  width: 460px;
 }
 
 .closeCalendar {
   cursor: pointer;
-  position: fixed;
+}
+
+.calForm {
+  float: right;
+  width: 63%;
+  border-radius: 8px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.calCheckIn {
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid rgb(221, 221, 221);
+  width: 40%;
+}
+
+.calCheckOut {
+  display: inline-block;
+  padding: 10px;
+  width: 40%;
+}
+
+.calCarousel {
+  width: 100%;
+  height: 220px;
+  border: 1px solid black
 }
 
 /* Guests */
 .guests {
   position: fixed;
-  background-color: cadetblue;
-  width: 200px;
-  height: 100px;
-  top: 100;
-  left: 50px;
+  background: none;
+  width: 378px;
+  top: 225px;
+  right: 5%;
+  height: 400px;
 }
 
 .guestsContent {
   position: relative;
   width: 80%;
   margin: 0 auto;
-  height: auto;
+  height: 400px;
+  padding-right: 10px;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
 .closeGuests {
   cursor: pointer;
   position: fixed;
+}
+
+/*
+  Carousel
+  ==============================================
+*/
+
+.carousel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.day {
+  padding: 7px;
 }

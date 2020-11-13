@@ -8,7 +8,11 @@ const Guests = (props) => {
   return (
     <div className="guests">
       <div className="guestsContent">
-        <p>Guests</p>
+        <div>
+          <div>Adults</div>
+          <div>Children</div>
+          <div>Infants</div>
+        </div>
         <button className="closeGuests" type="button" onClick={props.close}>Close</button>
       </div>
     </div>

@@ -11,6 +11,12 @@ const Reservations = () => {
       taxes: 0,
     },
   );
+  const [dates, setDates] = useState(
+    {
+      checkIn: '',
+      checkOut: '',
+    },
+  );
 
   useEffect(() => {
     axios.get('/api/homes/21/calendar')
@@ -26,11 +32,13 @@ const Reservations = () => {
 
   return (
     <div>
-      <p>
-        {fees.nightlyFee}
-        / night
-      </p>
-      <Form />
+      <div className="box">
+        <div className="nightlyFee">
+          {fees.nightlyFee}
+          / night
+        </div>
+        <Form dates={dates} setDates={setDates} />
+      </div>
     </div>
   );
 };

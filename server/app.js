@@ -1,22 +1,22 @@
-var express = require('express');
-var parser = require('body-parser');
-var router = require('./routes.js');
+const express = require('express');
+const parser = require('body-parser');
+const path = require('path');
+const router = require('./routes.js');
+const db = require('../db/mongo/db.js');
 
-// import the db later !!
-
-var app = express();
+const app = express();
 
 app.set('port', 8000);
 
 app.use(parser.json());
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.use('/homes', router);
+app.use('/api/homes', router);
 
-app.listen(app.get('port'), err => {
+app.listen(app.get('port'), (err) => {
   if (err) {
-    console.log('error connecting to server')
+    console.log('error connecting to server');
   } else {
     console.log(`>>> Listening on port ${app.get('port')} <<<`);
   }
-})
+});

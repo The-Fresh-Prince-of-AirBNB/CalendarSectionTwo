@@ -1,7 +1,8 @@
-var router = require('express').Router();
+const router = require('express').Router();
+const controller = require('../db/controller/controller.js');
 
-router.get('/', () => {
-  console.log('get request!')
-})
+router.get('/:id/calendar', controller.get);
+
+router.post('/:id/reservation', controller.post);
 
 module.exports = router;

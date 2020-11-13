@@ -9,7 +9,7 @@ const Reservations = () => {
 
   return (
     <div>
-      <p>Reservations</p>
+      <p>Res</p>
       <button onClick={() => getReservation()}>Get Reservation at id 24</button>
     </div>
   );

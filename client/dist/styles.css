@@ -1,0 +1,49 @@
+/*
+  ==============================================
+  Popups/Modals
+  ==============================================
+*/
+
+/* Calendar */
+.calendar {
+  position: fixed;
+  background-color: antiquewhite;
+  width: 200px;
+  height: 100px;
+  top: 0;
+  left: 50px;
+}
+
+.calendarContent {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+}
+
+.closeCalendar {
+  cursor: pointer;
+  position: fixed;
+}
+
+/* Guests */
+.guests {
+  position: fixed;
+  background-color: cadetblue;
+  width: 200px;
+  height: 100px;
+  top: 100;
+  left: 50px;
+}
+
+.guestsContent {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+}
+
+.closeGuests {
+  cursor: pointer;
+  position: fixed;
+}

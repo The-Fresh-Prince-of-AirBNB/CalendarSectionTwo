@@ -1,97 +1,73 @@
-const allData = [];
+const allDates = [];
 
-for (let i = 0; i < 10; i++) {
+const getDates = () => {
+  const minNights = Math.floor(Math.random() * (5 - 2) + 2);
+  const start = Math.floor(Math.random() * 25);
+  return [minNights, start, start + minNights];
+};
+
+for (let i = 0; i < 10; i += 1) {
   const nightly = Math.floor(Math.random() * (400 - 90) + 90);
+  const dates = getDates();
   const dummy = {
     id: i,
     nightlyFee: nightly,
-    cleaningFee: nightly * 0.2,
-    serviceFee: nightly * 0.15,
-    taxes: nightly * 0.1,
-    minNights: Math.random() * (5 - 2) + 2,
+    cleaningFee: nightly * 0.25,
+    serviceFee: nightly * (0.25 / 2),
+    taxes: nightly * (0.25 / 4),
+    minNights: dates[0],
     reservations: {
       dec: [
         {
-          start: [2020, 12, Math.floor(Math.random() * 25)],
-          end: [2020, 12, this.start[2]],
+          start: [2020, 11, dates[1]],
+          end: [2020, 11, dates[2]],
         },
-        {
-          start: '2020/12/17',
-          end: '2020/12/19',
-        }
       ],
       jan: [
         {
-          start: '2021/01/13',
-          end: '2021/01/16',
-        },
-        {
-          start: '2021/01/17',
-          end: '2021/12/19',
+          start: [2021, 0, dates[1]],
+          end: [2021, 0, dates[2]],
         },
       ],
       feb: [
         {
-          start: '2021/02/02',
-          end: '2021/02/03',
-        },
-        {
-          start: '2021/02/05',
-          end: '2021/02/09',
+          start: [2021, 1, dates[1]],
+          end: [2021, 1, dates[2]],
         },
       ],
       mar: [
         {
-          start: '2021/03/02',
-          end: '2021/03/03',
-        },
-        {
-          start: '2021/03/05',
-          end: '2021/03/09',
+          start: [2021, 2, dates[1]],
+          end: [2021, 2, dates[2]],
         },
       ],
       apr: [
         {
-          start: '2021/04/02',
-          end: '2021/04/03',
-        },
-        {
-          start: '2021/04/05',
-          end: '2021/04/09',
+          start: [2021, 3, dates[1]],
+          end: [2021, 3, dates[2]],
         },
       ],
       may: [
         {
-          start: '2021/05/02',
-          end: '2021/05/03',
-        },
-        {
-          start: '2021/05/05',
-          end: '2021/05/09',
+          start: [2021, 4, dates[1]],
+          end: [2021, 4, dates[2]],
         },
       ],
       jun: [
         {
-          start: '2021/06/02',
-          end: '2021/06/03',
-        },
-        {
-          start: '2021/06/05',
-          end: '2021/06/09',
+          start: [2021, 5, dates[1]],
+          end: [2021, 5, dates[2]],
         },
       ],
       jul: [
         {
-          start: '2021/07/02',
-          end: '2021/07/03',
-        },
-        {
-          start: '2021/07/05',
-          end: '2021/07/09',
+          start: [2021, 6, dates[1]],
+          end: [2021, 6, dates[2]],
         },
       ],
     },
   };
+  allDates.push(dummy);
 }
 
 module.exports = [

@@ -13,10 +13,18 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth();
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth();
+    console.log(month);
     for (let i = 0; i < 12; i += 1) {
-      this.generateCal(year, month);
+      if (month === 11) {
+        year += 1;
+        month = 0;
+        this.generateCal(year, month);
+      } else {
+        month += 1;
+        this.generateCal(year, month);
+      }
     }
   }
 
@@ -31,7 +39,8 @@ class Carousel extends React.Component {
   generateCal(y, m) {
     // Create an array of the empty days on the first week of the month
     const emptyDays = [];
-    for (let i = 0; i < (new Date(y, m)).getDay(); i += 1) {
+    for (let i = 0; i < (new Date(y, m - 1)).getDay(); i += 1) {
+      console.log(new Date(y, m).getDay());
       emptyDays.push(<td className="day">{''}</td>);
     }
     // Create an array of all the other days in the month
@@ -100,7 +109,7 @@ class Carousel extends React.Component {
             </table>
           </div>
           <div>
-            <div>{this.state.date}</div>
+            <div>{this.state.date + 1}</div>
             <table className="table">
               <thead>
                 <tr>

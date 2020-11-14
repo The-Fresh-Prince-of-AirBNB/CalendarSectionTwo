@@ -1,3 +1,99 @@
+const allData = [];
+
+for (let i = 0; i < 10; i++) {
+  const nightly = Math.floor(Math.random() * (400 - 90) + 90);
+  const dummy = {
+    id: i,
+    nightlyFee: nightly,
+    cleaningFee: nightly * 0.2,
+    serviceFee: nightly * 0.15,
+    taxes: nightly * 0.1,
+    minNights: Math.random() * (5 - 2) + 2,
+    reservations: {
+      dec: [
+        {
+          start: [2020, 12, Math.floor(Math.random() * 25)],
+          end: [2020, 12, this.start[2]],
+        },
+        {
+          start: '2020/12/17',
+          end: '2020/12/19',
+        }
+      ],
+      jan: [
+        {
+          start: '2021/01/13',
+          end: '2021/01/16',
+        },
+        {
+          start: '2021/01/17',
+          end: '2021/12/19',
+        },
+      ],
+      feb: [
+        {
+          start: '2021/02/02',
+          end: '2021/02/03',
+        },
+        {
+          start: '2021/02/05',
+          end: '2021/02/09',
+        },
+      ],
+      mar: [
+        {
+          start: '2021/03/02',
+          end: '2021/03/03',
+        },
+        {
+          start: '2021/03/05',
+          end: '2021/03/09',
+        },
+      ],
+      apr: [
+        {
+          start: '2021/04/02',
+          end: '2021/04/03',
+        },
+        {
+          start: '2021/04/05',
+          end: '2021/04/09',
+        },
+      ],
+      may: [
+        {
+          start: '2021/05/02',
+          end: '2021/05/03',
+        },
+        {
+          start: '2021/05/05',
+          end: '2021/05/09',
+        },
+      ],
+      jun: [
+        {
+          start: '2021/06/02',
+          end: '2021/06/03',
+        },
+        {
+          start: '2021/06/05',
+          end: '2021/06/09',
+        },
+      ],
+      jul: [
+        {
+          start: '2021/07/02',
+          end: '2021/07/03',
+        },
+        {
+          start: '2021/07/05',
+          end: '2021/07/09',
+        },
+      ],
+    },
+  };
+}
+
 module.exports = [
   {
     id: 0,
@@ -10,10 +106,10 @@ module.exports = [
     reservations: [
       {
         booked: ['2020-12-11', '2020-12-12', '2020-12-13'],
-        adults: 2,
-        children: 0,
-        infants: 1,
-        totalCost: 528.20,
+        // adults: 2,
+        // children: 0,
+        // infants: 1,
+        // totalCost: 528.20,
       },
       {
         booked: ['2021-01-13', '2021-01-14', '2021-01-15', '2021-01-16'],
@@ -36,10 +132,10 @@ module.exports = [
     reservations: [
       {
         booked: ['2020-12-05', '2020-12-06', '2020-12-07'],
-        adults: 3,
-        children: 0,
-        infants: 0,
-        totalCost: 420.97,
+        // adults: 3,
+        // children: 0,
+        // infants: 0,
+        // totalCost: 420.97,
       },
       {
         booked: ['2021-01-01', '2021-01-02', '2021-01-03', '2021-01-04'],

@@ -5,10 +5,7 @@ class Carousel extends React.Component {
   constructor() {
     super();
     this.state = {
-      dates: {
-        months: [],
-        years: [],
-      },
+      date: 0,
       carousel: [],
     };
     this.generateCal = this.generateCal.bind(this);
@@ -16,39 +13,22 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    this.generateCal(new Date().getFullYear(), new Date().getMonth(), 'f');
-    this.generateCal(new Date().getFullYear(), new Date().getMonth() + 1, 'f');
-  }
-
-  changeDates(direction) {
-    const dates = this.state.dates;
-    const newCarousel = this.state.carousel;
-    if (direction === 'f') {
-      newCarousel.shift();
-      if (dates.months[1] === 11) {
-        this.generateCal(dates.years[1] + 1, 0, direction);
-      } else {
-        this.generateCal(dates.years[1], dates.months[1] + 1, direction);
-      }
-      dates.months.shift();
-      dates.years.shift();
-    } else {
-      newCarousel.pop();
-      if (dates.months[1] === 0) {
-        this.generateCal(dates.years[1] - 1, 11, direction);
-      } else {
-        this.generateCal(dates.years[1], dates.months[1] - 1, direction);
-      }
-      dates.months.pop();
-      dates.years.pop();
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth();
+    for (let i = 0; i < 12; i += 1) {
+      this.generateCal(year, month);
     }
-    this.setState({
-      dates: dates,
-      carousel: newCarousel,
-    });
   }
 
-  generateCal(y, m, dir) {
+  changeDates(dir) {
+    if (dir === 'f') {
+      this.setState({ date: this.state.date + 1 });
+    } else {
+      this.setState({ date: this.state.date - 1 });
+    }
+  }
+
+  generateCal(y, m) {
     // Create an array of the empty days on the first week of the month
     const emptyDays = [];
     for (let i = 0; i < (new Date(y, m)).getDay(); i += 1) {
@@ -85,16 +65,7 @@ class Carousel extends React.Component {
     const calendar = rows.map((r) => <tr>{r}</tr>);
     const newCarousel = this.state.carousel;
     newCarousel.push(calendar);
-    const newDates = this.state.dates;
-    if (dir === 'f') {
-      newDates.months.push(m);
-      newDates.years.push(y);
-    } else {
-      newDates.months.unshift(m);
-      newDates.years.unshift(y);
-    }
     this.setState({
-      dates: newDates,
       carousel: newCarousel,
     });
   }
@@ -110,7 +81,7 @@ class Carousel extends React.Component {
         </button>
         <div className="carousel">
           <div>
-            <div>November, 2020</div>
+            <div>{this.state.date}</div>
             <table className="table">
               <thead>
                 <tr>
@@ -124,12 +95,12 @@ class Carousel extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.carousel[0]}
+                {this.state.carousel[this.state.date]}
               </tbody>
             </table>
           </div>
           <div>
-            <div>December, 2020</div>
+            <div>{this.state.date}</div>
             <table className="table">
               <thead>
                 <tr>
@@ -143,7 +114,7 @@ class Carousel extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.carousel[1]}
+                {this.state.carousel[this.state.date + 1]}
               </tbody>
             </table>
           </div>

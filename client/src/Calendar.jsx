@@ -31,6 +31,10 @@ const Calendar = (props) => {
   return (
     <div className="calendar">
       <div className="calendarContent">
+        <div>
+          <div style={{ fontSize: '22px' }}>Select Dates</div>
+          <div>Minimum stay: </div>
+        </div>
         <form className="calForm">
           <div className="calCheckIn" ref={checkInRef}>
             <div>CHECK-IN</div>
@@ -44,8 +48,8 @@ const Calendar = (props) => {
         <div className="calCarousel">
           <Carousel />
         </div>
-        <button className="closeCalendar" type="button" onClick={props.close}>Close</button>
       </div>
+      <button className="closeCalendar" type="button" onClick={props.close}>Close</button>
     </div>
   );
 };

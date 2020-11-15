@@ -12,14 +12,15 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.jsx?/,
-        include: SRC_DIR,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'env', 'stage-0'],
-        },
-      },
+      // {
+      //   test: /\.jsx?/,
+      //   include: SRC_DIR,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     presets: ['@babel/react', '@babel/es2015'],
+      //     plugins: ['@babel/proposal-class-properties'],
+      //   },
+      // },
       {
         test: [/\.wexbim$/, /\.docx$/, /\.csv$/, /\.mp4$/, /\.xlsx$/, /\.doc$/, /\.avi$/, /\.webm$/, /\.mov$/, /\.mp3$/, /\.pdf$/],
         use: [
@@ -30,6 +31,19 @@ module.exports = {
         test: /\.(png|jpg)$/,
         use: [
           'url-loader?limit=200000',
+        ],
+      },
+      {
+        test: /\.(gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              query: {
+                name: 'assets/[name].[ext]',
+              },
+            },
+          },
         ],
       },
       {

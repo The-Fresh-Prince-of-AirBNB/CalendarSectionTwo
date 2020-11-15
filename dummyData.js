@@ -17,60 +17,44 @@ for (let i = 0; i < 10; i += 1) {
     taxes: nightly * (0.25 / 4),
     minNights: dates[0],
     reservations: {
-      dec: [
-        {
-          start: [2020, 11, dates[1]],
-          end: [2020, 11, dates[2]],
-        },
-      ],
-      jan: [
-        {
-          start: [2021, 0, dates[1]],
-          end: [2021, 0, dates[2]],
-        },
-      ],
-      feb: [
-        {
-          start: [2021, 1, dates[1]],
-          end: [2021, 1, dates[2]],
-        },
-      ],
-      mar: [
-        {
-          start: [2021, 2, dates[1]],
-          end: [2021, 2, dates[2]],
-        },
-      ],
-      apr: [
-        {
-          start: [2021, 3, dates[1]],
-          end: [2021, 3, dates[2]],
-        },
-      ],
-      may: [
-        {
-          start: [2021, 4, dates[1]],
-          end: [2021, 4, dates[2]],
-        },
-      ],
-      jun: [
-        {
-          start: [2021, 5, dates[1]],
-          end: [2021, 5, dates[2]],
-        },
-      ],
-      jul: [
-        {
-          start: [2021, 6, dates[1]],
-          end: [2021, 6, dates[2]],
-        },
-      ],
+      dec: {
+        start: [2020, 11, dates[1]],
+        end: [2020, 11, dates[2]],
+      },
+      jan: {
+        start: [2021, 0, dates[1]],
+        end: [2021, 0, dates[2]],
+      },
+      feb: {
+        start: [2021, 1, dates[1]],
+        end: [2021, 1, dates[2]],
+      },
+      mar: {
+        start: [2021, 2, dates[1]],
+        end: [2021, 2, dates[2]],
+      },
+      apr: {
+        start: [2021, 3, dates[1]],
+        end: [2021, 3, dates[2]],
+      },
+      may: {
+        start: [2021, 4, dates[1]],
+        end: [2021, 4, dates[2]],
+      },
+      jun: {
+        start: [2021, 5, dates[1]],
+        end: [2021, 5, dates[2]],
+      },
+      jul: {
+        start: [2021, 6, dates[1]],
+        end: [2021, 6, dates[2]],
+      },
     },
   };
   allDates.push(dummy);
 }
 
-module.exports = [
+const dummyOne = [
   {
     id: 0,
     nightlyFee: 203,
@@ -2699,3 +2683,5 @@ module.exports = [
     ],
   },
 ];
+
+module.exports = allDates;

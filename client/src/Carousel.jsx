@@ -1,5 +1,7 @@
 import React from 'react';
 
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 // eslint-disable-next-line react/prefer-stateless-function
 class Carousel extends React.Component {
   constructor() {
@@ -15,7 +17,6 @@ class Carousel extends React.Component {
   componentDidMount() {
     let year = new Date().getFullYear();
     let month = new Date().getMonth();
-    console.log(month);
     for (let i = 0; i < 12; i += 1) {
       if (month === 11) {
         year += 1;
@@ -82,15 +83,22 @@ class Carousel extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.changeDates('b')} type="button">
-          Before
-        </button>
-        <button onClick={() => this.changeDates('f')} type="button">
-          Next
-        </button>
         <div className="carousel">
           <div>
-            <div>{this.state.date}</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+              <button
+                className="moveButton"
+                onClick={() => {
+                  if (this.state.date > 0) {
+                    this.changeDates('b');
+                  }
+                }}
+                type="button"
+              >
+                &#60;
+              </button>
+              <div style={{ marginRight: '40%', fontSize: '20px' }}>{months[this.state.date]}</div>
+            </div>
             <table className="table">
               <thead>
                 <tr>
@@ -109,7 +117,20 @@ class Carousel extends React.Component {
             </table>
           </div>
           <div>
-            <div>{this.state.date + 1}</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+              <div style={{ marginLeft: '40%', fontSize: '20px' }}>{months[this.state.date + 1]}</div>
+              <button
+                className="moveButton"
+                onClick={() => {
+                  if (this.state.date < 10) {
+                    this.changeDates('f');
+                  }
+                }}
+                type="button"
+              >
+                &#62;
+              </button>
+            </div>
             <table className="table">
               <thead>
                 <tr>

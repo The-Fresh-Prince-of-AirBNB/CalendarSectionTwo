@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 
 const reservationSchema = mongoose.Schema({
-  booked: [String],
-  adults: Number,
-  children: Number,
-  infants: Number,
-  totalCost: Number,
+  start: [Number],
+  end: [Number],
 });
 
 const listingSchema = mongoose.Schema({
@@ -16,7 +13,16 @@ const listingSchema = mongoose.Schema({
   taxes: Number,
   minNights: Number,
   rareFind: Boolean,
-  reservations: [reservationSchema],
+  reservations: {
+    dec: reservationSchema,
+    jan: reservationSchema,
+    feb: reservationSchema,
+    mar: reservationSchema,
+    apr: reservationSchema,
+    may: reservationSchema,
+    jun: reservationSchema,
+    jul: reservationSchema,
+  },
 });
 
 module.exports = mongoose.model('ListingModel', listingSchema);

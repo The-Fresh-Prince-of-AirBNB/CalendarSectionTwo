@@ -138,6 +138,7 @@ class Carousel extends React.Component {
       } else if (d === i && !first) {
         daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
         minDays[0] = true;
+      // the final booking
       } else if (d === i && trail) {
         daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
         daysBetween = false;
@@ -225,7 +226,11 @@ class Carousel extends React.Component {
             >
               &#60;
             </button>
-            <div style={{ marginRight: '40%', fontSize: '18px' }}>{months[date[0]]}</div>
+            <div style={{ marginRight: '30%', fontSize: '18px' }}>
+              {months[date[0]]}
+              {' '}
+              {date[1]}
+            </div>
           </div>
           <table className="table">
             <thead>
@@ -246,7 +251,11 @@ class Carousel extends React.Component {
         </div>
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-            <div style={{ marginLeft: '40%', fontSize: '18px', verticalAlign: 'bottom' }}>{months[next[0]]}</div>
+            <div style={{ marginLeft: '30%', fontSize: '18px', verticalAlign: 'bottom' }}>
+              {months[next[0]]}
+              {' '}
+              {next[1]}
+            </div>
             <button
               className="moveButton"
               onClick={() => this.changeDates('f')}

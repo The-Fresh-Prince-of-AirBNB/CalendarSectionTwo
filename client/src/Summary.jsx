@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 // eslint-disable-next-line arrow-body-style
 const Summary = (props) => {
   const lineStyle = { textDecoration: 'underline' };
+  const totals = {
+    nightly: Number.parseInt(props.fees.nightlyFee) * Number.parseInt(props.form.days),
+    service: Number.parseInt(props.fees.serviceFee) * Number.parseInt(props.form.days),
+    taxes: Number.parseInt(props.fees.taxes) * Number.parseInt(props.form.days),
+  };
+  const total = totals.nightly + totals.service + totals.taxes;
 
   return (
     <div>
@@ -25,7 +31,15 @@ const Summary = (props) => {
             $
             {props.fees.nightlyFee}
             {' '}
-            x 4 nights
+            x
+            {' '}
+            {props.form.days}
+            {' '}
+            nights
+          </div>
+          <div>
+            $
+            {totals.nightly}
           </div>
         </div>
         <div className="summaryItem">
@@ -39,20 +53,23 @@ const Summary = (props) => {
           <div style={lineStyle}>Service fee</div>
           <div>
             $
-            {props.fees.serviceFee}
+            {totals.service}
           </div>
         </div>
         <div className="summaryItem">
           <div style={lineStyle}>Occupancy taxes and fees</div>
           <div>
             $
-            {props.fees.taxes}
+            {totals.taxes}
           </div>
         </div>
       </div>
       <div className="total">
         <div>Total</div>
-        <div>$ x</div>
+        <div>
+          $
+          {total}
+        </div>
       </div>
     </div>
   );

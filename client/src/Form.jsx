@@ -6,7 +6,7 @@ import Summary from './Summary.jsx';
 const Form = (props) => {
   const [displayCalendar, setDisplayCalendar] = useState(false);
   const [displayGuests, setDisplayGuests] = useState(false);
-  const [form, setForm] = useState({ in: 'Add date', out: 'Add date' });
+  const [form, setForm] = useState({ in: 'Add date', out: 'Add date', days: 0 });
   const [guestBorder, setGuestBorder] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -51,14 +51,14 @@ const Form = (props) => {
     <div>
       <div className="form">
         <div>
-          <button className="check" onClick={() => toggleCalendar()} type="button">
+          <button className="check" style={{ borderBottom: guestBorder ? 'none' : '1px solid rgb(179, 179, 179)' }} onClick={() => toggleCalendar()} type="button">
             <div className="checkIn">
-              <div style={{ fontSize: '12px' }}>CHECK-IN</div>
-              <div style={{ color: 'rgb(125, 125, 125)' }}>{form.in}</div>
+              <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECK-IN</div>
+              <div style={{ color: 'rgb(125, 125, 125)', fontFamily: 'Montserrat, sans-serif' }}>{form.in}</div>
             </div>
             <div className="checkOut">
-              <div style={{ fontSize: '12px' }}>CHECKOUT</div>
-              <div style={{ color: 'rgb(125, 125, 125)' }}>{form.out}</div>
+              <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECKOUT</div>
+              <div style={{ color: 'rgb(125, 125, 125)', fontFamily: 'Montserrat, sans-serif' }}>{form.out}</div>
             </div>
           </button>
         </div>
@@ -83,10 +83,10 @@ const Form = (props) => {
               setGuestBorder(!guestBorder);
             }}
             type="button"
-            style={{ border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px' }}
+            style={{ border: guestBorder ? '2px solid black' : 'none',  borderRadius: '8px' }}
           >
-            <div style={{ fontSize: '12px' }}>GUESTS</div>
-            <div>
+            <div style={{ fontSize: '10px', marginBottom: '5px' }}>GUESTS</div>
+            <div style={{ fontFamily: 'Montserrat, sans-serif' }}>
               {max}
               {' '}
               guests
@@ -105,8 +105,15 @@ const Form = (props) => {
       {reserve
         ? (
           <Summary
-            fees={props.fees} x={x} y={y} setX={setX} setY={setY} mousePosition={mousePosition} />
-          )
+            fees={props.fees}
+            x={x}
+            y={y}
+            setX={setX}
+            setY={setY}
+            mousePosition={mousePosition}
+            form={form}
+          />
+        )
         : (
           <div>
             <button

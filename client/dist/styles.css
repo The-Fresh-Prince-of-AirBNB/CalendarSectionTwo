@@ -37,6 +37,10 @@ body {
   width: 100%
 }
 
+.calCheckInput:focus {
+  outline: none;
+}
+
 .check {
   display: flex;
   border: none;
@@ -105,18 +109,33 @@ body {
   flex-wrap: wrap;
   position: relative;
   height: auto;
-  width: 600px;
+  width: 650px;
 }
 
 .closeCalendar {
+  margin-top: 20px;
   cursor: pointer;
-  float: right;
   background: black;
   color: white;
   border: none;
   padding: 10px 15px;
   border-radius: 8px;
 }
+
+.clearCalendar {
+  text-decoration: underline;
+  background: none;
+  border: none;
+  margin-right: 5px;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.clearCalendar:hover {
+  cursor: pointer;
+  background: rgb(235, 235, 235);
+}
+
 
 .calForm {
   display: flex;
@@ -168,17 +187,51 @@ body {
 
 .carousel {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .calCarousel {
   width: 100%;
   height: auto;
-  margin: 20px 0px;
+  margin-top: 20px;
 }
 
 .day {
   padding: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 50%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.calDay {
+  border: 1px solid white;
+}
+
+.passDay {
+  color: rgb(143, 143, 143);
+}
+
+.resDay {
+  color: rgb(173, 173, 173);
+  text-decoration: line-through;
+}
+
+.bookDay {
+  color: white;
+  background: black;
+}
+
+.afterDay:hover {
+  background: rgb(224, 224, 224);
+}
+
+.calDay:hover {
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 table {

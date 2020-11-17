@@ -9,35 +9,23 @@ const Reservations = () => {
       cleaningFee: 0,
       serviceFee: 0,
       taxes: 0,
+      minNights: 0,
     },
   );
-  const [dates, setDates] = useState(
-    {
-      checkIn: '',
-      checkOut: '',
-    },
-  );
-
-  useEffect(() => {
-    axios.get('/api/homes/21/calendar')
-      .then((response) => {
-        setFees({
-          nightlyFee: response.data.nightlyFee,
-          cleaningFee: response.data.cleaningFee,
-          serviceFee: response.data.serviceFee,
-          taxes: response.data.taxes,
-        });
-      });
-  }, []);
+  const [dates, setDates] = useState({ reservations: {} });
 
   return (
     <div>
       <div className="box">
         <div className="nightlyFee">
-          {fees.nightlyFee}
-          / night
+          <div style={{ display: 'inline', fontSize: '20px' }}>
+            $
+            {' '}
+            {fees.nightlyFee}
+            </div>
+          <div style={{ display: 'inline' }}> / night</div>
         </div>
-        <Form dates={dates} setDates={setDates} />
+        <Form setFees={setFees} setDates={setDates} dates={dates} fees={fees} />
       </div>
     </div>
   );

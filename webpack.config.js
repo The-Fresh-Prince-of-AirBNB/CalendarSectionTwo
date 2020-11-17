@@ -12,15 +12,6 @@ module.exports = {
   },
   module: {
     loaders: [
-      // {
-      //   test: /\.jsx?/,
-      //   include: SRC_DIR,
-      //   loader: 'babel-loader',
-      //   query: {
-      //     presets: ['@babel/react', '@babel/es2015'],
-      //     plugins: ['@babel/proposal-class-properties'],
-      //   },
-      // },
       {
         test: [/\.wexbim$/, /\.docx$/, /\.csv$/, /\.mp4$/, /\.xlsx$/, /\.doc$/, /\.avi$/, /\.webm$/, /\.mov$/, /\.mp3$/, /\.pdf$/],
         use: [

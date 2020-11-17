@@ -14,14 +14,14 @@ const listingSchema = mongoose.Schema({
   minNights: Number,
   rareFind: Boolean,
   reservations: {
-    dec: reservationSchema,
-    jan: reservationSchema,
-    feb: reservationSchema,
-    mar: reservationSchema,
-    apr: reservationSchema,
-    may: reservationSchema,
-    jun: reservationSchema,
-    jul: reservationSchema,
+    December: reservationSchema,
+    January: reservationSchema,
+    February: reservationSchema,
+    March: reservationSchema,
+    April: reservationSchema,
+    May: reservationSchema,
+    June: reservationSchema,
+    July: reservationSchema,
   },
 });
 

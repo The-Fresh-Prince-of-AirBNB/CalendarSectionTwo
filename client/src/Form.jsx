@@ -37,7 +37,13 @@ const Form = (props) => {
           </button>
         </div>
         <div style={{ display: displayCalendar ? 'block' : 'none' }}>
-          <Calendar close={toggleCalendar} dateSet={props} />
+          <Calendar
+            close={toggleCalendar}
+            setFees={props.setFees}
+            setDates={props.setDates}
+            dates={props.dates}
+            fees={props.fees}
+          />
         </div>
         <div>
           <button className="guestBut" onClick={() => toggleGuests()} type="button">

@@ -96,8 +96,9 @@ class Carousel extends React.Component {
     }
   }
 
-  generateCal(y, m, d, bool) {
+  generateCal(y, m, d, first, trail) {
     const { dates, fees } = this.props;
+    const { checkIn } = this.state;
     const res = dates.reservations[0][months[m]];
     // Create an array of the empty days on the first week of the month
     const emptyDays = [];
@@ -107,34 +108,53 @@ class Carousel extends React.Component {
     // Create an array of all the other days in the month
     const today = [new Date().getDate(), new Date().getMonth()];
     const daysInTheMonth = [];
-    let daysAfter = false || bool;
-    let minDays = [false, 0];
+    let daysUntilNextReservation = false || first;
+    let daysAfterNextReservation = false;
+    let daysBetween = false;
+    const minDays = [false, 0];
     for (let i = 1; i <= (new Date(y, m + 1, 0).getDate()); i += 1) {
       if (res) {
         if (res.start[2] <= i && res.end[2] >= i) {
-          daysAfter = false;
+          daysUntilNextReservation = false;
           daysInTheMonth.push(<td className="day resDay">{i}</td>);
+          if (d) {
+            daysAfterNextReservation = true;
+          }
           continue;
         }
       }
-      if (minDays[0]) {
+      // greys out all previous days until the current day
+      if ((today[0] > i && today[1] === m)) {
+        daysInTheMonth.push(<td className="day passDay">{i}</td>);
+      // greys out the next n days correlating to the minumum stay
+      } else if (minDays[0]) {
         daysInTheMonth.push(<td className="day passDay">{i}</td>);
         minDays[1] += 1;
-        if (minDays[1] === fees.minNights - 1) {
-          daysAfter = true;
+        if (minDays[1] >= fees.minNights - 1) {
+          daysUntilNextReservation = true;
           minDays[0] = false;
         }
-      } else if ((today[0] > i && today[1] === m)) {
-        daysInTheMonth.push(<td className="day passDay">{i}</td>);
+      // if theres a day passed in the first time, make that day a checkin reservation day
+      } else if (d === i && !first) {
+        daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
+        minDays[0] = true;
+      } else if (d === i && trail) {
+        daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
+        daysBetween = false;
+      // if there is already a check in date
+      } else if (checkIn[0] === i && checkIn[1] === m && checkIn[2] === y) {
+        daysInTheMonth.push(<td className="day bookDay">{i}</td>);
+        daysBetween = true;
+      // marks the days between the two checkin dates
+      } else if (daysBetween) {
+        daysInTheMonth.push(<td className="day betweenDay">{i}</td>);
+        daysBetween = true;
+      // if the days are before the next reservation, push available calendar days
+      } else if (!daysAfterNextReservation) {
+        daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? 'day calDay afterDay' : 'day calDay'}>{i}</td>);
+      // else push non-available days
       } else {
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-        // eslint-disable-next-line no-lonely-if
-        if (d === i) {
-          daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
-          minDays[0] = true;
-        } else {
-          daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className={daysAfter ? 'day calDay afterDay' : 'day calDay'}>{i}</td>);
-        }
+        daysInTheMonth.push(<td className="day resDay">{i}</td>);
       }
     }
     const total = emptyDays.concat(daysInTheMonth);
@@ -167,16 +187,20 @@ class Carousel extends React.Component {
 
   makeReservation(d, m, y) {
     if (this.state.checkIn.length === 0) {
+      this.props.handleBook(m, d, y);
       this.setState({
         checkIn: [d, m, y],
       });
+      this.generateCal(y, m, d, false);
+      this.generateCal(y, m + 1, d, true);
     } else if (this.state.checkOut.length === 0) {
+      this.props.handleBook(m, d, y, true);
       this.setState({
         checkOut: [d, m, y],
       });
+      this.generateCal(y, m, d, true, true);
+      this.props.close();
     }
-    this.generateCal(y, m, d);
-    this.generateCal(y, m + 1, undefined, true);
   }
 
   clearReservation() {
@@ -185,6 +209,7 @@ class Carousel extends React.Component {
       checkOut: [],
     });
     this.getExisting();
+    this.props.handleBook(null);
   }
 
   render() {

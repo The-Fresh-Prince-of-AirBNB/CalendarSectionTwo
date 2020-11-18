@@ -18,7 +18,7 @@ const Reservations = () => {
     <div>
       <div className="box">
         <div className="nightlyFee">
-          <div style={{ display: 'inline', fontSize: '24px' }}>
+          <div style={{ display: 'inline', fontSize: '24px', fontWeight: '500' }}>
             $
             {' '}
             {fees.nightlyFee}

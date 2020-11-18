@@ -15,9 +15,13 @@ const Summary = (props) => {
       <button
         className="checkAvailabilityAndReserve"
         type="button"
-        style={{ backgroundPosition: `${props.x - 80}px ${props.y}px`, backgroundImage: 'linear-gradient(to right, #d43974, #d43939, #d43974)' }}
-        onMouseMove={(event) => props.mousePosition(event)}
+        style={props.hovering ? props.styling.hover : props.styling.static}
+        onMouseMove={(event) => {
+          props.mousePosition(event);
+          props.setHover(true);
+        }}
         onMouseLeave={() => {
+          props.setHover(false);
           props.setX(0);
           props.setY(0);
         }}

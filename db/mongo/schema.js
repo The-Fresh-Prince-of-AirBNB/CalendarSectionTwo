@@ -22,6 +22,10 @@ const listingSchema = mongoose.Schema({
     May: reservationSchema,
     June: reservationSchema,
     July: reservationSchema,
+    August: reservationSchema,
+    September: reservationSchema,
+    October: reservationSchema,
+    November: reservationSchema,
   },
 });
 

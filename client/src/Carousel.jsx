@@ -14,6 +14,7 @@ class Carousel extends React.Component {
       carousel: {},
       checkIn: [],
       checkOut: [],
+      range: 0,
     };
     this.generateCal = this.generateCal.bind(this);
     this.changeDates = this.changeDates.bind(this);
@@ -63,40 +64,49 @@ class Carousel extends React.Component {
 
   changeDates(dir) {
     const { date, next } = this.state;
-    if (dir === 'f' && date[0] === 10) {
+    const lastMonthYear = this.props.dates.reservations[0][months[date[0]]].start[0];
+    const nextMonthYear = this.props.dates.reservations[0][months[next[0]]].start[0];
+
+    if (dir === 'f' && date[0] === 10 && nextMonthYear === next[1]) {
       this.setState({
         date: [date[0] + 1, date[1]],
         next: [0, next[1] + 1],
+        range: this.state.range += 1,
       });
-    } else if (dir === 'f' && date[0] === 11) {
+    } else if (dir === 'f' && date[0] === 11 && nextMonthYear === next[1]) {
       this.setState({
         date: [0, date[1] + 1],
         next: [next[0] + 1, next[1]],
+        range: this.state.range += 1,
       });
-    } else if (dir === 'f') {
+    } else if (dir === 'f' && nextMonthYear === next[1]) {
       this.setState({
         date: [date[0] + 1, date[1]],
         next: [next[0] + 1, next[1]],
+        range: this.state.range += 1,
       });
-    } else if (dir === 'b' && date[0] === 0) {
+    } else if (dir === 'b' && date[0] === 0 && lastMonthYear === date[1]) {
       this.setState({
         date: [11, date[1] - 1],
         next: [next[0] - 1, next[1]],
+        range: this.state.range -= 1,
       });
-    } else if (dir === 'b' && next[0] === 0) {
+    } else if (dir === 'b' && next[0] === 0 && lastMonthYear === date[1]) {
       this.setState({
         date: [date[0] - 1, date[1]],
         next: [11, next[1] - 1],
+        range: this.state.range -= 1,
       });
-    } else {
+    } else if (lastMonthYear === date[1]) {
       this.setState({
         date: [date[0] - 1, date[1]],
         next: [next[0] - 1, next[1]],
+        range: this.state.range -= 1,
       });
     }
   }
 
-  generateCal(y, m, d, first, trail) {
+  generateCal(y, m, d, first, trail, lead) {
     const { dates, fees } = this.props;
     const { checkIn } = this.state;
     const res = dates.reservations[0][months[m]];
@@ -111,10 +121,19 @@ class Carousel extends React.Component {
     let daysUntilNextReservation = false || first;
     let daysAfterNextReservation = false;
     let daysBetween = false;
+    let daysBefore = false;
+    if (d) {
+      daysBefore = true;
+    }
     const minDays = [false, 0];
     for (let i = 1; i <= (new Date(y, m + 1, 0).getDate()); i += 1) {
+      if (lead) {
+        daysInTheMonth.push(<td className="day resDay">{i}</td>);
+        continue;
+      // greys out all previous days until the current day
+      }
       if (res) {
-        if (res.start[2] <= i && res.end[2] >= i) {
+        if (res.start[2] <= i && res.end[2] >= i && res.start[0] === y) {
           daysUntilNextReservation = false;
           daysInTheMonth.push(<td className="day resDay">{i}</td>);
           if (d) {
@@ -136,6 +155,7 @@ class Carousel extends React.Component {
         }
       // if theres a day passed in the first time, make that day a checkin reservation day
       } else if (d === i && !first) {
+        daysBefore = false;
         daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
         minDays[0] = true;
       // the final booking
@@ -152,7 +172,11 @@ class Carousel extends React.Component {
         daysBetween = true;
       // if the days are before the next reservation, push available calendar days
       } else if (!daysAfterNextReservation) {
-        daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? 'day calDay afterDay' : 'day calDay'}>{i}</td>);
+        if (daysBefore && !first) {
+          daysInTheMonth.push(<td className="day resDay">{i}</td>);
+        } else {
+          daysInTheMonth.push(<td onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? 'day calDay afterDay' : 'day calDay'}>{i}</td>);
+        }
       // else push non-available days
       } else {
         daysInTheMonth.push(<td className="day resDay">{i}</td>);
@@ -192,8 +216,19 @@ class Carousel extends React.Component {
       this.setState({
         checkIn: [d, m, y],
       });
-      this.generateCal(y, m, d, false);
-      this.generateCal(y, m + 1, d, true);
+      if (m === 0) {
+        this.generateCal(y - 1, 11, d, false, false, true);
+        this.generateCal(y, m, d, false);
+        this.generateCal(y, m + 1, d, true);
+      } else if (m < 11) {
+        this.generateCal(y, m - 1, d, false, false, true);
+        this.generateCal(y, m, d, false);
+        this.generateCal(y, m + 1, d, true);
+      } else if (m === 11) {
+        this.generateCal(y, m - 1, d, false, false, true);
+        this.generateCal(y, m, d, false);
+        this.generateCal(y + 1, 0, d, true);
+      }
     } else if (this.state.checkOut.length === 0) {
       this.props.handleBook(m, d, y, true);
       this.setState({
@@ -218,15 +253,23 @@ class Carousel extends React.Component {
     return (
       <div className="carousel">
         <div style={{ marginRight: '4.5%' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-            <button
-              className="moveButton"
-              onClick={() => this.changeDates('b')}
-              type="button"
-            >
-              &#60;
-            </button>
-            <div style={{ marginRight: '30%', fontSize: '18px' }}>
+          <div style={
+              {
+                display: 'flex', justifyContent: 'space-between', marginTop: '10px', alignItems: 'flex-end',
+              }
+            }
+          >
+            {this.state.range === 0 ? (<div style={{ height: '32px', width: '32px' }}> </div>)
+              : (
+                <button
+                  className="moveButton"
+                  onClick={() => this.changeDates('b')}
+                  type="button"
+                >
+                  &lt;
+                </button>
+              )}
+            <div style={{ marginRight: '30%', fontSize: '18px', marginBottom: '5px' }}>
               {months[date[0]]}
               {' '}
               {date[1]}
@@ -250,19 +293,27 @@ class Carousel extends React.Component {
           </table>
         </div>
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-            <div style={{ marginLeft: '30%', fontSize: '18px', verticalAlign: 'bottom' }}>
+          <div style={
+              {
+                display: 'flex', justifyContent: 'space-between', marginTop: '10px', alignItems: 'flex-end',
+              }
+            }
+          >
+            <div style={{ marginLeft: '30%', fontSize: '18px', marginBottom: '5px' }}>
               {months[next[0]]}
               {' '}
               {next[1]}
             </div>
-            <button
-              className="moveButton"
-              onClick={() => this.changeDates('f')}
-              type="button"
-            >
-              &#62;
-            </button>
+            {this.state.range === 10 ? ''
+              : (
+                <button
+                  className="moveButton"
+                  onClick={() => this.changeDates('f')}
+                  type="button"
+                >
+                  &gt;
+                </button>
+              )}
           </div>
           <table className="table">
             <thead>

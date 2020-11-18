@@ -71,28 +71,28 @@ const Calendar = (props) => {
       <div
         style={
         {
-          display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px', padding: '10px 0px 10px 8px',
+          display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px', padding: '10px 0px 10px 6px',
         }
       }
         className="calCheckOut"
         ref={checkInRef}
       >
         <div>
-          <div style={{ fontSize: '10px', marginBottom: '4px' }}>CHECKOUT</div>
+          <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECKOUT</div>
           <input type="text" className="calCheckInput" style={{ border: 'none', width: '70%', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkOut} onClick={() => toggleCheckin} value={book.end} onChange={(e) => handleChange(e, 'e')} />
         </div>
-        <button type="button" className="xButton">{book.end === '' ? '' : 'x'}</button>
+        <button type="button" className="xButton">{book.end === '' ? ' ' : 'x'}</button>
       </div>
     );
     checkInBox = (
-      <div className="calCheckIn" style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0px 10px 22px' }} ref={checkInRef}>
+      <div className="calCheckIn" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0px 10px 22px' }} ref={checkInRef}>
         <div>
-          <div style={{ fontSize: '10px', marginBottom: '4px' }}>CHECK-IN</div>
+          <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECK-IN</div>
           <input
             type="text"
             className="calCheckInput"
             style={{
-              border: 'none', width: '70%', lineHeight: '16px', marginLeft: '-2px', fontFamily: 'Montserrat, sans-serif',
+              border: 'none', width: '70%', marginLeft: '-2px', fontFamily: 'Montserrat, sans-serif',
             }}
             placeholder={placeholders.checkIn}
             onClick={() => toggleCheckin}
@@ -106,15 +106,35 @@ const Calendar = (props) => {
   } else {
     checkOutBox = (
       <div className="calCheckOut mask">
-        <div style={{ fontSize: '10px', marginBottom: '4px' }}>CHECKOUT</div>
+        <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECKOUT</div>
         <div style={{ lineHeight: '14px', fontSize: '13px' }}>Add date</div>
       </div>
     );
     checkInBox = (
-      <div style={{ display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px' }} className="calCheckIn" ref={checkInRef}>
+      <div
+        style={
+          {
+            display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px'
+          }
+        }
+        className="calCheckIn"
+        ref={checkInRef}
+      >
         <div style={{ paddingLeft: '4px' }}>
-          <div style={{ fontSize: '10px', marginBottom: '4px' }}>CHECK-IN</div>
-          <input type="text" className="calCheckInput" style={{ border: 'none', width: '70%', marginLeft: '-2px', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkIn} onClick={() => toggleCheckin} value={book.start} onChange={(e) => handleChange(e, 's')} />
+          <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECK-IN</div>
+          <input
+            type="text"
+            className="calCheckInput"
+            style={
+            {
+              border: 'none', width: '70%', marginLeft: '-2px', fontFamily: 'Montserrat, sans-serif',
+            }
+          }
+            placeholder={placeholders.checkIn}
+            onClick={() => toggleCheckin}
+            value={book.start}
+            onChange={(e) => handleChange(e, 's')}
+          />
         </div>
       </div>
     );
@@ -125,10 +145,12 @@ const Calendar = (props) => {
       <div className="calendarContent">
         <div>
           <div style={{ fontSize: '22px' }}>Select Dates</div>
-          <div>
+          <div style={{ color: 'rgb(114, 114, 114)', marginTop: '8px' }}>
             Minimum stay:
             {' '}
             {props.fees.minNights}
+            {' '}
+            nights
           </div>
         </div>
         <form className="calForm">

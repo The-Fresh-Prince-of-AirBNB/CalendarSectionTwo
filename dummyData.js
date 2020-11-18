@@ -49,6 +49,22 @@ for (let i = 0; i < 100; i += 1) {
         start: [2021, 6, dates[1]],
         end: [2021, 6, dates[2]],
       },
+      August: {
+        start: [2021, 7, dates[1]],
+        end: [2021, 7, dates[2]],
+      },
+      September: {
+        start: [2021, 8, dates[1]],
+        end: [2021, 8, dates[2]],
+      },
+      October: {
+        start: [2021, 9, dates[1]],
+        end: [2021, 9, dates[2]],
+      },
+      November: {
+        start: [2021, 10, dates[1]],
+        end: [2021, 10, dates[2]],
+      },
     },
   };
   allDates.push(dummy);

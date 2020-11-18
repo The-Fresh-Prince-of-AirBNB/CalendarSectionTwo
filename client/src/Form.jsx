@@ -12,6 +12,11 @@ const Form = (props) => {
   const [y, setY] = useState(0);
   const [reserve, setReserve] = useState(false);
   const [guests, setGuest] = useState({ adults: 2, children: 0, infants: 0 });
+  const [hovering, setHover] = useState(false);
+  const styling = {
+    hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d43974, #d13f36, #d43974)' },
+    static: { backgroundImage: 'linear-gradient(to right, #d13f36, #d43974, #d43974)' },
+  };
   const max = guests.adults + guests.children;
 
   const add = {
@@ -36,10 +41,14 @@ const Form = (props) => {
     setDisplayCalendar(!displayCalendar)
   );
 
-  const toggleGuests = (guests) => {
+  const toggleGuests = () => {
     setGuestBorder(!guestBorder);
     setDisplayGuests(!displayGuests);
-    console.log(guests);
+  };
+
+  const closeGuests = () => {
+    setGuestBorder(false);
+    setDisplayGuests(false);
   };
 
   const mousePosition = (event) => {
@@ -51,7 +60,11 @@ const Form = (props) => {
     <div>
       <div className="form">
         <div>
-          <button className="check" style={{ borderBottom: guestBorder ? 'none' : '1px solid rgb(179, 179, 179)' }} onClick={() => toggleCalendar()} type="button">
+          <button className="check" style={{ borderBottom: guestBorder ? 'none' : '1px solid rgb(179, 179, 179)' }} onClick={() => {
+            toggleCalendar();
+            closeGuests();
+          }} type="button"
+          >
             <div className="checkIn">
               <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECK-IN</div>
               <div style={{ color: 'rgb(125, 125, 125)', fontFamily: 'Montserrat, sans-serif' }}>{form.in}</div>
@@ -62,7 +75,7 @@ const Form = (props) => {
             </div>
           </button>
         </div>
-        <div style={{ display: displayCalendar ? 'block' : 'none' }}>
+        <div role="button" tabIndex={0} style={{ display: displayCalendar ? 'block' : 'none' }} onKeyDown={() => setDisplayGuests(false)}>
           <Calendar
             close={toggleCalendar}
             setFees={props.setFees}
@@ -83,7 +96,7 @@ const Form = (props) => {
               setGuestBorder(!guestBorder);
             }}
             type="button"
-            style={{ border: guestBorder ? '2px solid black' : 'none',  borderRadius: '8px' }}
+            style={{ border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px' }}
           >
             <div style={{ fontSize: '10px', marginBottom: '5px' }}>GUESTS</div>
             <div style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -94,7 +107,7 @@ const Form = (props) => {
           </button>
           <div style={{ display: displayGuests ? 'block' : 'none' }}>
             <Guests
-              close={toggleGuests}
+              toggleGuests={toggleGuests}
               guests={guests}
               max={max}
               add={add}
@@ -112,6 +125,9 @@ const Form = (props) => {
             setY={setY}
             mousePosition={mousePosition}
             form={form}
+            setHover={setHover}
+            hovering={hovering}
+            styling={styling}
           />
         )
         : (
@@ -119,9 +135,13 @@ const Form = (props) => {
             <button
               className="checkAvailabilityAndReserve"
               type="button"
-              style={{ backgroundPosition: `${x - 80}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d43974, #d43939, #d43974)' }}
-              onMouseMove={(event) => mousePosition(event)}
+              style={hovering ? styling.hover : styling.static}
+              onMouseMove={(event) => {
+                mousePosition(event);
+                setHover(true);
+              }}
               onMouseLeave={() => {
+                setHover(false);
                 setX(0);
                 setY(0);
               }}

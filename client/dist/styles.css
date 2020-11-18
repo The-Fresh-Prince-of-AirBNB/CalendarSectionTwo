@@ -62,7 +62,7 @@ body {
 }
 
 .checkOut {
-  padding: 10px;
+  padding: 10px 16px;
   width: 49%;
   white-space: nowrap;
 }
@@ -165,12 +165,12 @@ body {
 }
 
 .calCheckOut {
-  padding: 11px 0px 11px 11px;
+  padding: 10px 0px 10px 13px;
 }
 
 .mask {
-  background: rgb(235, 235, 235);
-  color: rgb(114, 114, 114);
+  background: rgb(245, 245, 245);
+  color: rgb(185, 185, 185);
   width: 50%;
   line-height: 15px;
 }
@@ -196,6 +196,7 @@ body {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
+  font-size: 12px;
 }
 
 .calCarousel {
@@ -275,7 +276,7 @@ table {
   position: fixed;
   background: none;
   width: 370px;
-  top: 240px;
+  top: 245px;
   right: 5.2%;
   height: 400px;
 }

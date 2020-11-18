@@ -38,7 +38,7 @@ const Guests = (props) => (
           4 guests maximum. Infants don’t count toward the number of guests.
         </div>
       </div>
-      <button className="clearCalendar closeGuests" type="button" onClick={props.close}>Close</button>
+      <button className="clearCalendar closeGuests" type="button" onClick={() => props.toggleGuests()}>Close</button>
     </div>
   </div>
 );

@@ -205,6 +205,12 @@ Calendar.defaultProps = {
     taxes: 0,
     minNights: 0,
   },
+  reserve: false,
+  setForm: () => null,
+  setReserve: () => null,
+  setFees: () => null,
+  setDates: () => null,
+  close: () => null,
 };
 
 Calendar.propTypes = {
@@ -219,12 +225,12 @@ Calendar.propTypes = {
       minNights: 0,
     },
   ),
-  setForm: PropTypes.func.isRequired,
-  setReserve: PropTypes.func.isRequired,
-  reserve: PropTypes.bool.isRequired,
-  setFees: PropTypes.func.isRequired,
-  setDates: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
+  reserve: PropTypes.bool,
+  setForm: PropTypes.func,
+  setReserve: PropTypes.func,
+  setFees: PropTypes.func,
+  setDates: PropTypes.func,
+  close: PropTypes.func,
 };
 
 export default Calendar;

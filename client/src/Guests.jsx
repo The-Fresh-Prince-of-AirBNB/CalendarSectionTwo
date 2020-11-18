@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Guests = (props) => (
   <div className="guests">
@@ -42,5 +43,19 @@ const Guests = (props) => (
     </div>
   </div>
 );
+
+Guests.defaultProps = {
+  guests: { adults: 2, children: 0, infants: 0 },
+  max: 2,
+  add: {},
+  toggleGuests: () => null,
+};
+
+Guests.propTypes = {
+  guests: PropTypes.shape({ adults: 2, children: 0, infants: 0 }),
+  max: PropTypes.number,
+  add: PropTypes.shape({}),
+  toggleGuests: PropTypes.func,
+};
 
 export default Guests;

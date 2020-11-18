@@ -174,8 +174,6 @@ const Form = ({
 };
 
 Form.defaultProps = {
-  setFees: () => null,
-  setDates: () => null,
   fees: {
     nightlyFee: 0,
     cleaningFee: 0,
@@ -184,11 +182,12 @@ Form.defaultProps = {
     minNights: 0,
   },
   dates: { reservations: {} },
+  setFees: () => null,
+  setDates: () => null,
 };
 
 Form.propTypes = {
-  setFees: PropTypes.func,
-  setDates: PropTypes.func,
+  dates: PropTypes.shape({ reservations: {} }),
   fees: PropTypes.shape(
     {
       nightlyFee: 0,
@@ -198,7 +197,8 @@ Form.propTypes = {
       minNights: 0,
     },
   ),
-  dates: PropTypes.shape({ reservations: {} }),
+  setFees: PropTypes.func,
+  setDates: PropTypes.func,
 };
 
 export default Form;

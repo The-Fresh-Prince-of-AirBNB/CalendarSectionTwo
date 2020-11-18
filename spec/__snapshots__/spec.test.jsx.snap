@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshots should render correctly in "debug" mode 1`] = `
+<div>
+  <div
+    className="form"
+  >
+    <div>
+      <button
+        className="check"
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottom": "1px solid rgb(179, 179, 179)",
+          }
+        }
+        type="button"
+      >
+        <div
+          className="checkIn"
+        >
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "5px",
+              }
+            }
+          >
+            CHECK-IN
+          </div>
+          <div
+            style={
+              Object {
+                "color": "rgb(125, 125, 125)",
+                "fontFamily": "Montserrat, sans-serif",
+              }
+            }
+          >
+            Add date
+          </div>
+        </div>
+        <div
+          className="checkOut"
+        >
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "5px",
+              }
+            }
+          >
+            CHECKOUT
+          </div>
+          <div
+            style={
+              Object {
+                "color": "rgb(125, 125, 125)",
+                "fontFamily": "Montserrat, sans-serif",
+              }
+            }
+          >
+            Add date
+          </div>
+        </div>
+      </button>
+    </div>
+    <div
+      onKeyDown={[Function]}
+      role="button"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={0}
+    >
+      <Calendar
+        close={[Function]}
+        dates={
+          Object {
+            "reservations": Object {},
+          }
+        }
+        fees={
+          Object {
+            "cleaningFee": 0,
+            "minNights": 0,
+            "nightlyFee": 0,
+            "serviceFee": 0,
+            "taxes": 0,
+          }
+        }
+        form={
+          Object {
+            "days": 0,
+            "in": "Add date",
+            "out": "Add date",
+          }
+        }
+        reserve={false}
+        setDates={[Function]}
+        setFees={[Function]}
+        setForm={[Function]}
+        setReserve={[Function]}
+      />
+    </div>
+    <div>
+      <button
+        className="guestBut"
+        onClick={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "border": "none",
+            "borderRadius": "8px",
+            "display": "flex",
+            "justifyContent": "space-between",
+            "padding": "10px 15px",
+          }
+        }
+        type="button"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "5px",
+              }
+            }
+          >
+            GUESTS
+          </div>
+          <div
+            style={
+              Object {
+                "fontFamily": "Montserrat, sans-serif",
+              }
+            }
+          >
+            2
+             
+            guests
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "fontSize": "16px",
+              "fontWeight": "lighter",
+            }
+          }
+        >
+          v
+        </div>
+      </button>
+      <div
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <Guests
+          add={
+            Object {
+              "adults": [Function],
+              "chilren": [Function],
+              "infants": [Function],
+            }
+          }
+          guests={
+            Object {
+              "adults": 2,
+              "children": 0,
+              "infants": 0,
+            }
+          }
+          max={2}
+          toggleGuests={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <button
+      className="checkAvailabilityAndReserve"
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      style={
+        Object {
+          "backgroundImage": "linear-gradient(to right, #d93243, #d93275, #d93275)",
+        }
+      }
+      type="button"
+    >
+      <div
+        style={
+          Object {
+            "display": "inline",
+          }
+        }
+      >
+        Check Availability
+      </div>
+    </button>
+  </div>
+</div>
+`;

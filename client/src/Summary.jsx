@@ -108,16 +108,46 @@ const Summary = (props) => {
   );
 };
 
+Summary.defaultProps = {
+  form: { in: 'Add date', out: 'Add date', days: 0 },
+  fees: {
+    nightlyFee: 0,
+    cleaningFee: 0,
+    serviceFee: 0,
+    taxes: 0,
+    minNights: 0,
+  },
+  styling: {
+    hover: {},
+    static: {},
+  },
+  hovering: false,
+  max: 2,
+  mousePosition: () => null,
+  setHover: () => null,
+  setX: () => null,
+  setY: () => null,
+};
+
 Summary.propTypes = {
-  fees: PropTypes.shape.isRequired,
-  hovering: PropTypes.bool.isRequired,
-  form: PropTypes.shape.isRequired,
-  max: PropTypes.shape.isRequired,
-  styling: PropTypes.shape.isRequired,
-  mousePosition: PropTypes.func.isRequired,
-  setHover: PropTypes.func.isRequired,
-  setX: PropTypes.func.isRequired,
-  setY: PropTypes.func.isRequired,
+  form: PropTypes.shape({ in: 'Add date', out: 'Add date', days: 0 }),
+  fees: PropTypes.shape({
+    nightlyFee: 0,
+    cleaningFee: 0,
+    serviceFee: 0,
+    taxes: 0,
+    minNights: 0,
+  }),
+  styling: PropTypes.shape({
+    hover: {},
+    static: {},
+  }),
+  max: PropTypes.number,
+  hovering: PropTypes.bool,
+  mousePosition: PropTypes.func,
+  setHover: PropTypes.func,
+  setX: PropTypes.func,
+  setY: PropTypes.func,
 };
 
 export default Summary;

@@ -351,13 +351,34 @@ class Carousel extends React.Component {
   }
 }
 
+Carousel.defaultProps = {
+  dates: { reservations: {} },
+  fees: {
+    nightlyFee: 0,
+    cleaningFee: 0,
+    serviceFee: 0,
+    taxes: 0,
+    minNights: 0,
+  },
+  close: () => null,
+  setFees: () => null,
+  setDates: () => null,
+  handleBook: () => null,
+};
+
 Carousel.propTypes = {
-  close: PropTypes.func.isRequired,
-  setFees: PropTypes.func.isRequired,
-  setDates: PropTypes.func.isRequired,
-  handleBook: PropTypes.func.isRequired,
-  dates: PropTypes.shape.isRequired,
-  fees: PropTypes.shape.isRequired,
+  dates: PropTypes.shape({ reservations: {} }),
+  fees: PropTypes.shape({
+    nightlyFee: 0,
+    cleaningFee: 0,
+    serviceFee: 0,
+    taxes: 0,
+    minNights: 0,
+  }),
+  close: PropTypes.func,
+  setFees: PropTypes.func,
+  setDates: PropTypes.func,
+  handleBook: PropTypes.func,
 };
 
 export default Carousel;

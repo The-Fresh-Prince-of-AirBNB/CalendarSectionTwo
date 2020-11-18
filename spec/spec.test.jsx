@@ -35,9 +35,9 @@ describe('testing for jest', () => {
 
 describe('Snapshots', () => {
   it('should render correctly in "debug" mode', () => {
-    shallow(<Form />);
-    // const component = shallow(<Form debug />);
-    // expect(component).toMatchSnapshot();
+    // shallow(<Form />);
+    const component = shallow(<Form debug />);
+    expect(component).toMatchSnapshot();
   });
 });
 
@@ -48,42 +48,71 @@ describe('Reservations', () => {
   });
 });
 
-// describe('Form', () => {
-//   const date = {
-//     start: [2020, 11, 20],
-//     end: [2020, 11, 25],
-//   };
+describe('Form', () => {
+  const date = {
+    start: [2020, 11, 20],
+    end: [2020, 11, 25],
+  };
 
-//   it('should render Form without crashing', () => {
-//     shallow(<Form />);
-//   });
+  it('should render Form without crashing', () => {
+    shallow(<Form />);
+  });
 
-//   it('accepts date props', () => {
-//     const wrapper = mount(<Form date={date} />);
-//     expect(wrapper.props().date).toEqual(date);
-//   });
-// });
+  it('accepts date props', () => {
+    const wrapper = mount(<Form date={date} />);
+    expect(wrapper.props().date).toEqual(date);
+  });
+});
 
-// describe('Guests', () => {
-//   it('should render Guests without crashing', () => {
-//     shallow(<Guests />);
-//   });
-// });
+describe('Guests', () => {
+  const guests = { adults: 2, children: 2, infants: 0 };
 
-// describe('Calendar', () => {
-//   it('should render Calendar without crashing', () => {
-//     shallow(<Calendar />);
-//   });
-// });
+  it('should render Guests without crashing', () => {
+    shallow(<Guests />);
+  });
 
-// describe('Carousel', () => {
-//   it('should render Carousel without crashing', () => {
-//     shallow(<Carousel />);
-//   });
-// });
+  it('accepts guests props', () => {
+    const wrapper = mount(<Guests guests={guests} />);
+    expect(wrapper.props().guests.adults).toEqual(2);
+    expect(wrapper.props().guests.adults).not.toEqual(3);
+  });
+});
 
-// describe('Summary', () => {
-//   it('should render Summary without crashing', () => {
-//     shallow(<Summary />);
-//   });
-// });
+describe('Calendar', () => {
+  const reserve = false;
+
+  it('should render Calendar without crashing', () => {
+    shallow(<Calendar />);
+  });
+
+  it('accepts reserve props', () => {
+    const wrapper = mount(<Calendar reserve={reserve} />);
+    expect(wrapper.props().reserve).toBeFalsy();
+  });
+});
+
+describe('Carousel', () => {
+  const testFunc = (x, y) => x + y;
+
+  it('should render Carousel without crashing', () => {
+    shallow(<Carousel />);
+  });
+
+  it('accepts function props', () => {
+    const wrapper = mount(<Carousel testFunc={testFunc} />);
+    expect(wrapper.props().testFunc(2, 3)).toEqual(5);
+  });
+});
+
+describe('Summary', () => {
+  const form = { in: '11/23/2020', out: '11/27/2020', days: 4 };
+
+  it('should render Summary without crashing', () => {
+    shallow(<Summary />);
+  });
+
+  it('accepts a form (object) props', () => {
+    const wrapper = mount(<Summary form={form} />);
+    expect(wrapper.props().form.in).toEqual('11/23/2020');
+  });
+});

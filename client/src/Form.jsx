@@ -100,18 +100,25 @@ const Form = ({
           <button
             type="button"
             className="guestBut"
-            style={{ border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px' }}
+            style={
+              {
+                border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: guestBorder ? '9px 13px' : '10px 15px',
+              }
+            }
             onClick={() => {
               toggleGuests();
               setGuestBorder(!guestBorder);
             }}
           >
-            <div style={{ fontSize: '10px', marginBottom: '5px' }}>GUESTS</div>
-            <div style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              {max}
-              {' '}
-              guests
+            <div>
+              <div style={{ fontSize: '10px', marginBottom: '5px' }}>GUESTS</div>
+              <div style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                {max}
+                {' '}
+                guests
+              </div>
             </div>
+            {displayGuests ? <div style={{ fontWeight: 'lighter', fontSize: '20px' }}>^</div> : <div style={{ fontWeight: 'lighter', fontSize: '16px' }}>v</div>}
           </button>
           <div style={{ display: displayGuests ? 'block' : 'none' }}>
             <Guests
@@ -166,11 +173,32 @@ const Form = ({
   );
 };
 
+Form.defaultProps = {
+  setFees: () => null,
+  setDates: () => null,
+  fees: {
+    nightlyFee: 0,
+    cleaningFee: 0,
+    serviceFee: 0,
+    taxes: 0,
+    minNights: 0,
+  },
+  dates: { reservations: {} },
+};
+
 Form.propTypes = {
-  setFees: PropTypes.func.isRequired,
-  setDates: PropTypes.func.isRequired,
-  fees: PropTypes.shape.isRequired,
-  dates: PropTypes.shape.isRequired,
+  setFees: PropTypes.func,
+  setDates: PropTypes.func,
+  fees: PropTypes.shape(
+    {
+      nightlyFee: 0,
+      cleaningFee: 0,
+      serviceFee: 0,
+      taxes: 0,
+      minNights: 0,
+    },
+  ),
+  dates: PropTypes.shape({ reservations: {} }),
 };
 
 export default Form;

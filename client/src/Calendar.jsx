@@ -70,6 +70,13 @@ const Calendar = (props) => {
     }
   };
 
+  const handleSumbit = (e) => {
+    e.preventDefault();
+    if (book.start.length > 0) {
+      console.log(book.start);
+    }
+  };
+
   useEffect(() => {
     document.addEventListener('click', toggleCheckin, false);
     return () => {
@@ -145,6 +152,11 @@ const Calendar = (props) => {
             onClick={() => toggleCheckin}
             value={book.start}
             onChange={(e) => handleChange(e, 's')}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSumbit(e);
+              }
+            }}
           />
         </div>
       </div>
@@ -183,15 +195,35 @@ const Calendar = (props) => {
   );
 };
 
+Calendar.defaultProps = {
+  form: { in: 'Add date', out: 'Add date', days: 0 },
+  dates: { reservations: {} },
+  fees: {
+    nightlyFee: 0,
+    cleaningFee: 0,
+    serviceFee: 0,
+    taxes: 0,
+    minNights: 0,
+  },
+};
+
 Calendar.propTypes = {
+  form: PropTypes.shape({ in: 'Add date', out: 'Add date', days: 0 }),
+  dates: PropTypes.shape({ reservations: {} }),
+  fees: PropTypes.shape(
+    {
+      nightlyFee: 0,
+      cleaningFee: 0,
+      serviceFee: 0,
+      taxes: 0,
+      minNights: 0,
+    },
+  ),
   setForm: PropTypes.func.isRequired,
   setReserve: PropTypes.func.isRequired,
   reserve: PropTypes.bool.isRequired,
-  form: PropTypes.shape.isRequired,
-  fees: PropTypes.shape.isRequired,
   setFees: PropTypes.func.isRequired,
   setDates: PropTypes.func.isRequired,
-  dates: PropTypes.shape.isRequired,
   close: PropTypes.func.isRequired,
 };
 

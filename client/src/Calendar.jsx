@@ -1,7 +1,20 @@
+/* eslint-disable import/extensions */
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import Carousel from './Carousel.jsx';
 
 const Calendar = (props) => {
+  const {
+    setForm,
+    setReserve,
+    reserve,
+    form,
+    fees,
+    setFees,
+    setDates,
+    dates,
+    close,
+  } = props;
   const checkInRef = useRef(null);
   const [placeholders, setPlaceholders] = useState({ checkIn: 'Add date', checkOut: 'Add date' });
   const [book, setBook] = useState({ start: '', end: '' });
@@ -21,31 +34,31 @@ const Calendar = (props) => {
     }
   };
 
-  const handleBook = (m, d, y, out) => {
-    const stringDate = `${m + 1}/${d}/${y}`;
-    if (m && !out) {
-      setBook({ start: stringDate, end: '' });
-      props.setForm({ in: stringDate, out: 'Add date', days: 0 });
-      setBox('checkOut');
-    } else if (out) {
-      const totDays = countDays(book.start, stringDate);
-      setBook({ start: book.start, end: stringDate });
-      props.setForm({ in: props.form.in, out: stringDate, days: totDays });
-      props.setReserve(!props.reserve);
-    } else {
-      setBook({ start: '', end: '' });
-      props.setForm({ in: 'Add date', out: 'Add date' });
-      setBox('checkIn');
-      props.setReserve(false);
-    }
-  };
-
   const countDays = (date1, date2) => {
     const date1Arr = date1.split('/');
     const date2Arr = date2.split('/');
     const newDate1 = new Date(date1Arr[2], date1Arr[0] - 1, date1Arr[1]);
     const newDate2 = new Date(date2Arr[2], date2Arr[0] - 1, date2Arr[1]);
     return ((newDate2 - newDate1) / (1000 * 3600 * 24));
+  };
+
+  const handleBook = (m, d, y, out) => {
+    const stringDate = `${m + 1}/${d}/${y}`;
+    if (m && !out) {
+      setBook({ start: stringDate, end: '' });
+      setForm({ in: stringDate, out: 'Add date', days: 0 });
+      setBox('checkOut');
+    } else if (out) {
+      const totDays = countDays(book.start, stringDate);
+      setBook({ start: book.start, end: stringDate });
+      setForm({ in: form.in, out: stringDate, days: totDays });
+      setReserve(!reserve);
+    } else {
+      setBook({ start: '', end: '' });
+      setForm({ in: 'Add date', out: 'Add date' });
+      setBox('checkIn');
+      setReserve(false);
+    }
   };
 
   const handleChange = (e, type) => {
@@ -81,7 +94,6 @@ const Calendar = (props) => {
           <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECKOUT</div>
           <input type="text" className="calCheckInput" style={{ border: 'none', width: '70%', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkOut} onClick={() => toggleCheckin} value={book.end} onChange={(e) => handleChange(e, 'e')} />
         </div>
-        <button type="button" className="xButton">{book.end === '' ? ' ' : 'x'}</button>
       </div>
     );
     checkInBox = (
@@ -100,7 +112,6 @@ const Calendar = (props) => {
             onChange={(e) => handleChange(e, 's')}
           />
         </div>
-        <button type="button" className="xButton">x</button>
       </div>
     );
   } else {
@@ -114,7 +125,7 @@ const Calendar = (props) => {
       <div
         style={
           {
-            display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px'
+            display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px',
           }
         }
         className="calCheckIn"
@@ -145,10 +156,10 @@ const Calendar = (props) => {
       <div className="calendarContent">
         <div>
           <div style={{ fontSize: '22px' }}>Select Dates</div>
-          <div style={{ color: 'rgb(114, 114, 114)', marginTop: '8px' }}>
+          <div style={{ color: 'rgb(160, 160, 160)', marginTop: '8px' }}>
             Minimum stay:
             {' '}
-            {props.fees.minNights}
+            {fees.minNights}
             {' '}
             nights
           </div>
@@ -159,17 +170,29 @@ const Calendar = (props) => {
         </form>
         <div className="calCarousel">
           <Carousel
-            setFees={props.setFees}
-            setDates={props.setDates}
-            dates={props.dates}
-            fees={props.fees}
-            close={props.close}
+            setFees={setFees}
+            setDates={setDates}
+            dates={dates}
+            fees={fees}
+            close={close}
             handleBook={handleBook}
           />
         </div>
       </div>
     </div>
   );
+};
+
+Calendar.propTypes = {
+  setForm: PropTypes.func.isRequired,
+  setReserve: PropTypes.func.isRequired,
+  reserve: PropTypes.bool.isRequired,
+  form: PropTypes.shape.isRequired,
+  fees: PropTypes.shape.isRequired,
+  setFees: PropTypes.func.isRequired,
+  setDates: PropTypes.func.isRequired,
+  dates: PropTypes.shape.isRequired,
+  close: PropTypes.func.isRequired,
 };
 
 export default Calendar;

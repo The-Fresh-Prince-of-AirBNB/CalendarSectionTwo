@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/extensions */
 /* eslint-disable no-undef */
 
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { cleanup } from '@testing-library/react';
 import {
-  configure, shallow, mount, render
+  configure, shallow, mount,
 } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 // import 'jsdom-global/register';
@@ -12,8 +14,8 @@ import Adapter from 'enzyme-adapter-react-16';
 // Import all components for testing
 import Guests from '../client/src/Guests.jsx';
 import Form from '../client/src/Form.jsx';
-import Carousel from '../client/src/Carousel.jsx'
-import Calendar from '../client/src/Calendar.jsx'
+import Carousel from '../client/src/Carousel.jsx';
+import Calendar from '../client/src/Calendar.jsx';
 import Reservations from '../client/src/Reservations.jsx';
 
 configure({ adapter: new Adapter() });

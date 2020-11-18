@@ -1,29 +1,58 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
 // eslint-disable-next-line arrow-body-style
 const Summary = (props) => {
+  const {
+    fees,
+    hovering,
+    form,
+    max,
+    styling,
+    mousePosition,
+    setHover,
+    setX,
+    setY,
+  } = props;
+
   const lineStyle = { textDecoration: 'underline' };
-  const totals = {
-    nightly: Number.parseInt(props.fees.nightlyFee) * Number.parseInt(props.form.days),
-    service: Number.parseInt(props.fees.serviceFee) * Number.parseInt(props.form.days),
-    taxes: Number.parseInt(props.fees.taxes) * Number.parseInt(props.form.days),
+  const tots = {
+    nightly: Number.parseInt(fees.nightlyFee, 10) * Number.parseInt(form.days, 10),
+    service:
+      Number.parseInt(fees.serviceFee, 10)
+      * Number.parseInt(form.days, 10)
+      + Number.parseInt(max, 10) * 15,
+    taxes:
+      Number.parseInt(fees.taxes, 10)
+      * Number.parseInt(form.days, 10)
+      + Number.parseInt(max, 10) * 10,
   };
-  const total = totals.nightly + totals.service + totals.taxes;
+  const total = tots.nightly + Number.parseInt(fees.cleaningFee, 10) + tots.service + tots.taxes;
+
+  const bookReservation = () => {
+    axios.post('/api/homes/21/reservation', {
+      days: 'testerrr',
+    });
+  };
 
   return (
     <div>
       <button
         className="checkAvailabilityAndReserve"
         type="button"
-        style={props.hovering ? props.styling.hover : props.styling.static}
+        style={hovering ? styling.hover : styling.static}
         onMouseMove={(event) => {
-          props.mousePosition(event);
-          props.setHover(true);
+          mousePosition(event);
+          setHover(true);
         }}
         onMouseLeave={() => {
-          props.setHover(false);
-          props.setX(0);
-          props.setY(0);
+          setHover(false);
+          setX(0);
+          setY(0);
+        }}
+        onClick={() => {
+          bookReservation();
         }}
       >
         Reserve
@@ -33,38 +62,38 @@ const Summary = (props) => {
         <div className="summaryItem">
           <div style={lineStyle}>
             $
-            {props.fees.nightlyFee}
+            {fees.nightlyFee}
             {' '}
             x
             {' '}
-            {props.form.days}
+            {form.days}
             {' '}
             nights
           </div>
           <div>
             $
-            {totals.nightly}
+            {tots.nightly}
           </div>
         </div>
         <div className="summaryItem">
           <div style={lineStyle}>Cleaning fee</div>
           <div>
             $
-            {props.fees.cleaningFee}
+            {fees.cleaningFee}
           </div>
         </div>
         <div className="summaryItem">
           <div style={lineStyle}>Service fee</div>
           <div>
             $
-            {totals.service}
+            {tots.service}
           </div>
         </div>
         <div className="summaryItem">
           <div style={lineStyle}>Occupancy taxes and fees</div>
           <div>
             $
-            {totals.taxes}
+            {tots.taxes}
           </div>
         </div>
       </div>
@@ -77,6 +106,18 @@ const Summary = (props) => {
       </div>
     </div>
   );
+};
+
+Summary.propTypes = {
+  fees: PropTypes.shape.isRequired,
+  hovering: PropTypes.bool.isRequired,
+  form: PropTypes.shape.isRequired,
+  max: PropTypes.shape.isRequired,
+  styling: PropTypes.shape.isRequired,
+  mousePosition: PropTypes.func.isRequired,
+  setHover: PropTypes.func.isRequired,
+  setX: PropTypes.func.isRequired,
+  setY: PropTypes.func.isRequired,
 };
 
 export default Summary;

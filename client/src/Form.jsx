@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable import/extensions */
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Calendar from './Calendar.jsx';
 import Guests from './Guests.jsx';
 import Summary from './Summary.jsx';
 
-const Form = (props) => {
+const Form = ({
+  fees, dates, setFees, setDates,
+}) => {
   const [displayCalendar, setDisplayCalendar] = useState(false);
   const [displayGuests, setDisplayGuests] = useState(false);
   const [form, setForm] = useState({ in: 'Add date', out: 'Add date', days: 0 });
@@ -13,11 +17,11 @@ const Form = (props) => {
   const [reserve, setReserve] = useState(false);
   const [guests, setGuest] = useState({ adults: 2, children: 0, infants: 0 });
   const [hovering, setHover] = useState(false);
-  const styling = {
-    hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d43974, #d13f36, #d43974)' },
-    static: { backgroundImage: 'linear-gradient(to right, #d13f36, #d43974, #d43974)' },
-  };
   const max = guests.adults + guests.children;
+  const styling = {
+    hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d93275, #d93243, #d93275)' },
+    static: { backgroundImage: 'linear-gradient(to right, #d93243, #d93275, #d93275)' },
+  };
 
   const add = {
     adults: (q) => {
@@ -60,28 +64,32 @@ const Form = (props) => {
     <div>
       <div className="form">
         <div>
-          <button className="check" style={{ borderBottom: guestBorder ? 'none' : '1px solid rgb(179, 179, 179)' }} onClick={() => {
-            toggleCalendar();
-            closeGuests();
-          }} type="button"
+          <button
+            type="button"
+            className="check"
+            style={{ borderBottom: guestBorder ? 'none' : '1px solid rgb(179, 179, 179)' }}
+            onClick={() => {
+              toggleCalendar();
+              closeGuests();
+            }}
           >
             <div className="checkIn">
               <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECK-IN</div>
-              <div style={{ color: 'rgb(125, 125, 125)', fontFamily: 'Montserrat, sans-serif' }}>{form.in}</div>
+              <div style={{ color: form.in === 'Add date' ? 'rgb(125, 125, 125)' : 'black', fontFamily: 'Montserrat, sans-serif' }}>{form.in}</div>
             </div>
             <div className="checkOut">
               <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECKOUT</div>
-              <div style={{ color: 'rgb(125, 125, 125)', fontFamily: 'Montserrat, sans-serif' }}>{form.out}</div>
+              <div style={{ color: form.out === 'Add date' ? 'rgb(125, 125, 125)' : 'black', fontFamily: 'Montserrat, sans-serif' }}>{form.out}</div>
             </div>
           </button>
         </div>
         <div role="button" tabIndex={0} style={{ display: displayCalendar ? 'block' : 'none' }} onKeyDown={() => setDisplayGuests(false)}>
           <Calendar
             close={toggleCalendar}
-            setFees={props.setFees}
-            setDates={props.setDates}
-            dates={props.dates}
-            fees={props.fees}
+            setFees={setFees}
+            setDates={setDates}
+            dates={dates}
+            fees={fees}
             setForm={setForm}
             form={form}
             setReserve={setReserve}
@@ -90,13 +98,13 @@ const Form = (props) => {
         </div>
         <div>
           <button
+            type="button"
             className="guestBut"
+            style={{ border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px' }}
             onClick={() => {
               toggleGuests();
               setGuestBorder(!guestBorder);
             }}
-            type="button"
-            style={{ border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px' }}
           >
             <div style={{ fontSize: '10px', marginBottom: '5px' }}>GUESTS</div>
             <div style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -118,7 +126,8 @@ const Form = (props) => {
       {reserve
         ? (
           <Summary
-            fees={props.fees}
+            fees={fees}
+            max={max}
             x={x}
             y={y}
             setX={setX}
@@ -133,8 +142,8 @@ const Form = (props) => {
         : (
           <div>
             <button
-              className="checkAvailabilityAndReserve"
               type="button"
+              className="checkAvailabilityAndReserve"
               style={hovering ? styling.hover : styling.static}
               onMouseMove={(event) => {
                 mousePosition(event);
@@ -147,12 +156,21 @@ const Form = (props) => {
               }}
               onClick={() => toggleCalendar()}
             >
-              Check Availability
+              <div style={{ display: 'inline' }}>
+                Check Availability
+              </div>
             </button>
           </div>
         )}
     </div>
   );
+};
+
+Form.propTypes = {
+  setFees: PropTypes.func.isRequired,
+  setDates: PropTypes.func.isRequired,
+  fees: PropTypes.shape.isRequired,
+  dates: PropTypes.shape.isRequired,
 };
 
 export default Form;

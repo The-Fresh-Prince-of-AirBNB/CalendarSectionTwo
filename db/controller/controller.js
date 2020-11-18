@@ -13,7 +13,7 @@ module.exports = {
   },
 
   post: (req, res) => {
-    const find = { id: 24, reservationInfo: 'placeholder' };
+    const find = req.body;
     model.makeReservation(find, (err, result) => {
       if (err) {
         res.sendStatus(400);

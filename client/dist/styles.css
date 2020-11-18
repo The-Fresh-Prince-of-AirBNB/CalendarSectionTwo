@@ -77,13 +77,27 @@ body {
 }
 
 .checkAvailabilityAndReserve {
+  transition: all .2s ease;
   margin-top: 16px;
-  width: 100%;
   border: none;
-  padding: 14px;
+  width: 100%;
+  padding: 15px;
   border-radius: 8px;
   color: white;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.checkAvailabilityAndReserve:active {
+  padding: 13px;
+  font-size: 15px;
+  width: 96%;
+  margin: 18px 0px 2px 0px;
+  margin-left: 2%;
+}
+
+.checkAvailabilityAndReserve:focus {
+  outline: none;
 }
 
 
@@ -98,11 +112,11 @@ body {
 .calendar {
   position: fixed;
   background-color: rgb(255, 255, 255);
-  top: 106px;
+  top: 112px;
   right: 5%;
   border-radius: 14px;
-  padding: 26px 30px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 8px 16px;
+  padding: 20px 30px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 16px 8px;
 }
 
 .calendarContent {
@@ -116,6 +130,7 @@ body {
 }
 
 .closeCalendar {
+  transition: all .2s ease;
   margin-top: 20px;
   cursor: pointer;
   background: black;
@@ -127,6 +142,12 @@ body {
 
 .closeCalendar:focus {
   outline: none;
+}
+
+.closeCalendar:active {
+  font-size: 12px;
+  padding: 9px 14px;
+  margin: 21px 4px 1px 1px;
 }
 
 .clearCalendar {
@@ -302,6 +323,11 @@ table {
   font-size: 16px;
 }
 
+.closeGuests:active {
+  margin-right: 5px;
+  margin-bottom: 4px;
+}
+
 .guestType {
   display: flex;
   justify-content: space-between;
@@ -340,6 +366,11 @@ table {
   border: 1px solid rgb(173, 173, 173);
 }
 
+.nonZero:hover {
+  color: black;
+  border: 1px solid black;
+}
+
 .zero {
   background: rgb(247, 247, 247);
   color: rgb(226, 226, 226);
@@ -363,12 +394,11 @@ table {
 }
 
 .total {
-  border-top: 1px solid rgb(221, 221, 221);
+  border-top: 1px solid rgb(209, 209, 209);
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
   margin-top: 10px;
   padding: 30px 0px 5px 0px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }

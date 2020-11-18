@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+/* eslint-disable import/extensions */
+import React, { useState } from 'react';
 import Form from './Form.jsx';
 
 const Reservations = () => {
@@ -22,7 +22,7 @@ const Reservations = () => {
             $
             {' '}
             {fees.nightlyFee}
-            </div>
+          </div>
           <div style={{ display: 'inline' }}> / night</div>
         </div>
         <Form setFees={setFees} setDates={setDates} dates={dates} fees={fees} />

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Calendar from './Calendar.jsx';
 import Guests from './Guests.jsx';
 import Summary from './Summary.jsx';
+import styles from '../../styles.css';
 
 const Form = ({
   fees, dates, setFees, setDates,
@@ -17,28 +18,10 @@ const Form = ({
   const [reserve, setReserve] = useState(false);
   const [guests, setGuest] = useState({ adults: 2, children: 0, infants: 0 });
   const [hovering, setHover] = useState(false);
-  const max = guests.adults + guests.children;
+  const totalGuests = guests.adults + guests.children;
   const styling = {
     hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d93275, #d93243, #d93275)' },
     static: { backgroundImage: 'linear-gradient(to right, #d93243, #d93275, #d93275)' },
-  };
-
-  const add = {
-    adults: (q) => {
-      if ((q === -1 && guests.adults > 0) || (q === 1 && max < 4)) {
-        setGuest({ adults: guests.adults + q, children: guests.children, infants: guests.infants });
-      }
-    },
-    chilren: (q) => {
-      if ((q === -1 && guests.children > 0) || (q === 1 && max < 4)) {
-        setGuest({ adults: guests.adults, children: guests.children + q, infants: guests.infants });
-      }
-    },
-    infants: (q) => {
-      if ((q === -1 && guests.infants > 0) || q === 1) {
-        setGuest({ adults: guests.adults, children: guests.children, infants: guests.infants + q });
-      }
-    },
   };
 
   const toggleCalendar = () => (
@@ -62,28 +45,29 @@ const Form = ({
 
   return (
     <div>
-      <div className="form">
+      <div className={styles.form}>
         <div>
           <button
             type="button"
-            className="check"
+            data-testid="formCalendarTest"
+            className={styles.check}
             style={{ borderBottom: guestBorder ? 'none' : '1px solid rgb(179, 179, 179)' }}
             onClick={() => {
               toggleCalendar();
               closeGuests();
             }}
           >
-            <div className="checkIn">
+            <div className={styles.checkIn}>
               <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECK-IN</div>
               <div style={{ color: form.in === 'Add date' ? 'rgb(125, 125, 125)' : 'black', fontFamily: 'Montserrat, sans-serif' }}>{form.in}</div>
             </div>
-            <div className="checkOut">
+            <div className={styles.checkOut}>
               <div style={{ fontSize: '10px', marginBottom: '5px' }}>CHECKOUT</div>
               <div style={{ color: form.out === 'Add date' ? 'rgb(125, 125, 125)' : 'black', fontFamily: 'Montserrat, sans-serif' }}>{form.out}</div>
             </div>
           </button>
         </div>
-        <div role="button" tabIndex={0} style={{ display: displayCalendar ? 'block' : 'none' }} onKeyDown={() => setDisplayGuests(false)}>
+        <div data-testid="openCalendarTest" role="button" tabIndex={0} style={{ display: displayCalendar ? 'block' : 'none' }} onKeyDown={() => setDisplayGuests(false)}>
           <Calendar
             close={toggleCalendar}
             setFees={setFees}
@@ -99,7 +83,8 @@ const Form = ({
         <div>
           <button
             type="button"
-            className="guestBut"
+            data-testid="buttonGuestTest"
+            className={styles.guestBut}
             style={
               {
                 border: guestBorder ? '2px solid black' : 'none', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: guestBorder ? '9px 13px' : '10px 15px',
@@ -112,20 +97,19 @@ const Form = ({
           >
             <div>
               <div style={{ fontSize: '10px', marginBottom: '5px' }}>GUESTS</div>
-              <div style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                {max}
+              <div data-testid="numOfGuests" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                {totalGuests}
                 {' '}
                 guests
               </div>
             </div>
             {displayGuests ? <div style={{ fontWeight: 'lighter', fontSize: '20px' }}>^</div> : <div style={{ fontWeight: 'lighter', fontSize: '16px' }}>v</div>}
           </button>
-          <div style={{ display: displayGuests ? 'block' : 'none' }}>
+          <div data-testid="closeGuestTest" style={{ display: displayGuests ? 'block' : 'none' }}>
             <Guests
               toggleGuests={toggleGuests}
               guests={guests}
-              max={max}
-              add={add}
+              setGuest={setGuest}
             />
           </div>
         </div>
@@ -134,7 +118,7 @@ const Form = ({
         ? (
           <Summary
             fees={fees}
-            max={max}
+            totalGuests={totalGuests}
             x={x}
             y={y}
             setX={setX}
@@ -150,7 +134,7 @@ const Form = ({
           <div>
             <button
               type="button"
-              className="checkAvailabilityAndReserve"
+              className={styles.checkAvailabilityAndReserve}
               style={hovering ? styling.hover : styling.static}
               onMouseMove={(event) => {
                 mousePosition(event);

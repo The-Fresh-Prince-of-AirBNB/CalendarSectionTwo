@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Carousel from './Carousel.jsx';
+import styles from '../../styles.css';
 
 const Calendar = (props) => {
   const {
@@ -94,22 +95,22 @@ const Calendar = (props) => {
           display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px', padding: '10px 0px 10px 6px',
         }
       }
-        className="calCheckOut"
+        className={styles.calCheckOut}
         ref={checkInRef}
       >
         <div>
           <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECKOUT</div>
-          <input type="text" className="calCheckInput" style={{ border: 'none', width: '70%', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkOut} onClick={() => toggleCheckin} value={book.end} onChange={(e) => handleChange(e, 'e')} />
+          <input type="text" className={styles.calCheckInput} style={{ border: 'none', width: '70%', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkOut} onClick={() => toggleCheckin} value={book.end} onChange={(e) => handleChange(e, 'e')} />
         </div>
       </div>
     );
     checkInBox = (
-      <div className="calCheckIn" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0px 10px 22px' }} ref={checkInRef}>
+      <div className={styles.calCheckIn} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0px 10px 22px' }} ref={checkInRef}>
         <div>
           <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECK-IN</div>
           <input
             type="text"
-            className="calCheckInput"
+            className={styles.calCheckInput}
             style={{
               border: 'none', width: '70%', marginLeft: '-2px', fontFamily: 'Montserrat, sans-serif',
             }}
@@ -123,7 +124,7 @@ const Calendar = (props) => {
     );
   } else {
     checkOutBox = (
-      <div className="calCheckOut mask">
+      <div className={`${styles.calCheckOut} ${styles.mask}`}>
         <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECKOUT</div>
         <div style={{ lineHeight: '14px', fontSize: '13px' }}>Add date</div>
       </div>
@@ -135,14 +136,14 @@ const Calendar = (props) => {
             display: 'flex', justifyContent: 'space-between', border: '2px solid black', borderRadius: '8px',
           }
         }
-        className="calCheckIn"
+        className={styles.calCheckIn}
         ref={checkInRef}
       >
         <div style={{ paddingLeft: '4px' }}>
           <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECK-IN</div>
           <input
             type="text"
-            className="calCheckInput"
+            className={styles.calCheckInput}
             style={
             {
               border: 'none', width: '70%', marginLeft: '-2px', fontFamily: 'Montserrat, sans-serif',
@@ -164,8 +165,8 @@ const Calendar = (props) => {
   }
 
   return (
-    <div className="calendar">
-      <div className="calendarContent">
+    <div className={styles.calendar}>
+      <div className={styles.calendarContent}>
         <div>
           <div style={{ fontSize: '22px' }}>Select Dates</div>
           <div style={{ color: 'rgb(160, 160, 160)', marginTop: '8px' }}>
@@ -176,11 +177,11 @@ const Calendar = (props) => {
             nights
           </div>
         </div>
-        <form className="calForm">
+        <form className={styles.calForm}>
           {checkInBox}
           {checkOutBox}
         </form>
-        <div className="calCarousel">
+        <div className={styles.calCarousel}>
           <Carousel
             setFees={setFees}
             setDates={setDates}

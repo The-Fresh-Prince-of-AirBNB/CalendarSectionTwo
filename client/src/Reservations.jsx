@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import Form from './Form.jsx';
+import styles from '../../styles.css';
 
 const Reservations = () => {
   const [fees, setFees] = useState(
@@ -16,8 +17,8 @@ const Reservations = () => {
 
   return (
     <div>
-      <div className="box">
-        <div className="nightlyFee">
+      <div className={styles.box}>
+        <div className={styles.nightlyFee}>
           <div style={{ display: 'inline', fontSize: '24px', fontWeight: '500' }}>
             $
             {' '}

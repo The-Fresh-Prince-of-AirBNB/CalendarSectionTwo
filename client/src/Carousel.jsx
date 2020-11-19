@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import styles from '../../styles.css';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -116,7 +117,7 @@ class Carousel extends React.Component {
     // Create an array of the empty days on the first week of the month
     const emptyDays = [];
     for (let i = 0; i < (new Date(y, m)).getDay(); i += 1) {
-      emptyDays.push(<td className="day"> </td>);
+      emptyDays.push(<td className={styles.day}> </td>);
     }
     // Create an array of all the other days in the month
     const today = [new Date().getDate(), new Date().getMonth()];
@@ -131,14 +132,14 @@ class Carousel extends React.Component {
     const minDays = [false, 0];
     for (let i = 1; i <= (new Date(y, m + 1, 0).getDate()); i += 1) {
       if (lead) {
-        daysInTheMonth.push(<td className="day resDay">{i}</td>);
+        daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
         continue;
       // greys out all previous days until the current day
       }
       if (res) {
         if (res.start[2] <= i && res.end[2] >= i && res.start[0] === y) {
           daysUntilNextReservation = false;
-          daysInTheMonth.push(<td className="day resDay">{i}</td>);
+          daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
           if (d) {
             daysAfterNextReservation = true;
           }
@@ -147,10 +148,10 @@ class Carousel extends React.Component {
       }
       // greys out all previous days until the current day
       if ((today[0] > i && today[1] === m)) {
-        daysInTheMonth.push(<td className="day passDay">{i}</td>);
+        daysInTheMonth.push(<td className={`${styles.day} ${styles.passDay}`}>{i}</td>);
       // greys out the next n days correlating to the minumum stay
       } else if (minDays[0]) {
-        daysInTheMonth.push(<td className="day passDay">{i}</td>);
+        daysInTheMonth.push(<td className={`${styles.day} ${styles.passDay}`}>{i}</td>);
         minDays[1] += 1;
         if (minDays[1] >= fees.minNights - 1) {
           daysUntilNextReservation = true;
@@ -159,30 +160,30 @@ class Carousel extends React.Component {
       // if theres a day passed in the first time, make that day a checkin reservation day
       } else if (d === i && !first) {
         daysBefore = false;
-        daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
+        daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         minDays[0] = true;
       // the final booking
       } else if (d === i && trail) {
-        daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className="day bookDay">{i}</td>);
+        daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         daysBetween = false;
       // if there is already a check in date
       } else if (checkIn[0] === i && checkIn[1] === m && checkIn[2] === y) {
-        daysInTheMonth.push(<td className="day bookDay">{i}</td>);
+        daysInTheMonth.push(<td className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         daysBetween = true;
       // marks the days between the two checkin dates
       } else if (daysBetween) {
-        daysInTheMonth.push(<td className="day betweenDay">{i}</td>);
+        daysInTheMonth.push(<td className={`${styles.day} ${styles.betweenDay}`}>{i}</td>);
         daysBetween = true;
       // if the days are before the next reservation, push available calendar days
       } else if (!daysAfterNextReservation) {
         if (daysBefore && !first) {
-          daysInTheMonth.push(<td className="day resDay">{i}</td>);
+          daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
         } else {
-          daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? 'day calDay afterDay' : 'day calDay'}>{i}</td>);
+          daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? `${styles.day} ${styles.calDay} ${styles.afterDay}` : `${styles.day} ${styles.calDay}`}>{i}</td>);
         }
       // else push non-available days
       } else {
-        daysInTheMonth.push(<td className="day resDay">{i}</td>);
+        daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
       }
     }
     const total = emptyDays.concat(daysInTheMonth);
@@ -261,7 +262,7 @@ class Carousel extends React.Component {
     } = this.state;
 
     return (
-      <div className="carousel">
+      <div className={styles.carousel}>
         <div style={{ marginRight: '4.5%' }}>
           <div style={
               {
@@ -272,7 +273,7 @@ class Carousel extends React.Component {
             {range === 0 ? (<div style={{ height: '32px', width: '32px' }}> </div>)
               : (
                 <button
-                  className="moveButton"
+                  className={styles.moveButton}
                   onClick={() => this.changeDates('b')}
                   type="button"
                 >
@@ -285,7 +286,7 @@ class Carousel extends React.Component {
               {date[1]}
             </div>
           </div>
-          <table className="table">
+          <table className={styles.table}>
             <thead>
               <tr style={{ color: 'rgb(129, 129, 129)' }}>
                 <th>Su</th>
@@ -309,7 +310,7 @@ class Carousel extends React.Component {
               }
             }
           >
-            <div className="titleTest" style={{ marginLeft: '30%', fontSize: '18px', marginBottom: '5px' }}>
+            <div className={styles.titleTest} style={{ marginLeft: '30%', fontSize: '18px', marginBottom: '5px' }}>
               {months[next[0]]}
               {' '}
               {next[1]}
@@ -317,8 +318,7 @@ class Carousel extends React.Component {
             {range === 10 ? ''
               : (
                 <button
-                  className="moveButton"
-                  data-testid="moveButtonTest"
+                  className={styles.moveButton}
                   onClick={() => this.changeDates('f')}
                   type="button"
                 >
@@ -326,7 +326,7 @@ class Carousel extends React.Component {
                 </button>
               )}
           </div>
-          <table className="table">
+          <table className={styles.table}>
             <thead>
               <tr style={{ color: 'rgb(129, 129, 129)' }}>
                 <th>Su</th>
@@ -344,8 +344,8 @@ class Carousel extends React.Component {
           </table>
         </div>
         <div>
-          <button className="clearCalendar" type="button" onClick={() => this.clearReservation()}>Clear dates</button>
-          <button className="closeCalendar" type="button" onClick={close}>Close</button>
+          <button className={styles.clearCalendar} type="button" onClick={() => this.clearReservation()}>Clear dates</button>
+          <button className={styles.closeCalendar} type="button" onClick={close}>Close</button>
         </div>
       </div>
     );

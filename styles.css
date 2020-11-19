@@ -1,4 +1,4 @@
-@import "compass/css3";
+/* @import "compass/css3"; */
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -92,7 +92,7 @@ body {
   padding: 13px;
   font-size: 15px;
   width: 96%;
-  margin: 18px 0px 2px 0px;
+  margin: 18px 0px 3px 0px;
   margin-left: 2%;
 }
 

@@ -4,7 +4,7 @@
   "description": "reservation calendar for an airbnb clone item detail page",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
+    "react-dev": "webpack --watch",
     "start": "nodemon server/app.js",
     "seed": "node seed.js",
     "test": "jest"
@@ -12,11 +12,11 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/spec/mock/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/client/dist/"
+      "\\.(css|less)$": "<rootDir>/spec/mock/fileMock.js"
     },
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
-      "<rootDir>/client/src/stylesheets/"
+      "<rootDir>/styles.css"
     ],
     "testEnvironment": "jsdom",
     "snapshotSerializers": [
@@ -46,7 +46,7 @@
     "react-test-renderer": "^16.14.0",
     "style-loader": "^2.0.0",
     "supertest": "^6.0.1",
-    "webpack": "^2.2.1",
+    "webpack": "^5.6.0",
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
@@ -57,6 +57,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-stage-2": "6.24.1",
     "body-parser": "1.19.0",
+    "core-js": "^3.7.0",
     "express": "^4.15.0",
     "font-awesome": "^4.7.0",
     "mongoose": "^5.10.11",
@@ -66,6 +67,6 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-fontawesome": "^1.7.1"
+    "regenerator-runtime": "^0.13.7"
   }
 }

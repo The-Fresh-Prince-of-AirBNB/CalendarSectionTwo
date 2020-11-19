@@ -1,13 +1,621 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reservations should render Reservations without crashing 1`] = `
+exports[`Calendar should render Calendar without crashing 1`] = `
+<div>
+  <div>
+    <div>
+      <div
+        style={
+          Object {
+            "fontSize": "22px",
+          }
+        }
+      >
+        Select Dates
+      </div>
+      <div
+        style={
+          Object {
+            "color": "rgb(160, 160, 160)",
+            "marginTop": "8px",
+          }
+        }
+      >
+        Minimum stay:
+         
+        0
+         
+        nights
+      </div>
+    </div>
+    <form>
+      <div
+        style={
+          Object {
+            "border": "2px solid black",
+            "borderRadius": "8px",
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "paddingLeft": "4px",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "3px",
+              }
+            }
+          >
+            CHECK-IN
+          </div>
+          <input
+            onChange={[Function]}
+            onClick={[Function]}
+            onKeyPress={[Function]}
+            placeholder="Add date"
+            style={
+              Object {
+                "border": "none",
+                "fontFamily": "Montserrat, sans-serif",
+                "marginLeft": "-2px",
+                "width": "70%",
+              }
+            }
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="undefined undefined"
+      >
+        <div
+          style={
+            Object {
+              "fontSize": "10px",
+              "marginBottom": "3px",
+            }
+          }
+        >
+          CHECKOUT
+        </div>
+        <div
+          style={
+            Object {
+              "fontSize": "13px",
+              "lineHeight": "14px",
+            }
+          }
+        >
+          Add date
+        </div>
+      </div>
+    </form>
+    <div>
+      <Carousel
+        close={[Function]}
+        dates={
+          Object {
+            "reservations": Object {},
+          }
+        }
+        fees={
+          Object {
+            "cleaningFee": 0,
+            "minNights": 0,
+            "nightlyFee": 0,
+            "serviceFee": 0,
+            "taxes": 0,
+          }
+        }
+        handleBook={[Function]}
+        setDates={[Function]}
+        setFees={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Carousel should render Carousel without crashing 1`] = `
 <div>
   <div
-    className="box"
+    style={
+      Object {
+        "marginRight": "4.5%",
+      }
+    }
   >
     <div
-      className="nightlyFee"
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "display": "flex",
+          "justifyContent": "space-between",
+          "marginTop": "10px",
+        }
+      }
     >
+      <div
+        style={
+          Object {
+            "height": "32px",
+            "width": "32px",
+          }
+        }
+      >
+         
+      </div>
+      <div
+        style={
+          Object {
+            "fontSize": "18px",
+            "marginBottom": "5px",
+            "marginRight": "30%",
+          }
+        }
+      >
+        January
+         
+        0
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr
+          style={
+            Object {
+              "color": "rgb(129, 129, 129)",
+            }
+          }
+        >
+          <th>
+            Su
+          </th>
+          <th>
+            Mo
+          </th>
+          <th>
+            Tu
+          </th>
+          <th>
+            We
+          </th>
+          <th>
+            Th
+          </th>
+          <th>
+            Fr
+          </th>
+          <th>
+            Sa
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </div>
+  <div>
+    <div
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "display": "flex",
+          "justifyContent": "space-between",
+          "marginTop": "10px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "fontSize": "18px",
+            "marginBottom": "5px",
+            "marginLeft": "30%",
+          }
+        }
+      >
+        February
+         
+        0
+      </div>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        &gt;
+      </button>
+    </div>
+    <table>
+      <thead>
+        <tr
+          style={
+            Object {
+              "color": "rgb(129, 129, 129)",
+            }
+          }
+        >
+          <th>
+            Su
+          </th>
+          <th>
+            Mo
+          </th>
+          <th>
+            Tu
+          </th>
+          <th>
+            We
+          </th>
+          <th>
+            Th
+          </th>
+          <th>
+            Fr
+          </th>
+          <th>
+            Sa
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </div>
+  <div>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Clear dates
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Close
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Form should render Form without crashing 1`] = `
+<div>
+  <div>
+    <div>
+      <button
+        data-testid="formCalendarTest"
+        onClick={[Function]}
+        style={
+          Object {
+            "borderBottom": "1px solid rgb(179, 179, 179)",
+          }
+        }
+        type="button"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "5px",
+              }
+            }
+          >
+            CHECK-IN
+          </div>
+          <div
+            style={
+              Object {
+                "color": "rgb(125, 125, 125)",
+                "fontFamily": "Montserrat, sans-serif",
+              }
+            }
+          >
+            Add date
+          </div>
+        </div>
+        <div>
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "5px",
+              }
+            }
+          >
+            CHECKOUT
+          </div>
+          <div
+            style={
+              Object {
+                "color": "rgb(125, 125, 125)",
+                "fontFamily": "Montserrat, sans-serif",
+              }
+            }
+          >
+            Add date
+          </div>
+        </div>
+      </button>
+    </div>
+    <div
+      data-testid="openCalendarTest"
+      onKeyDown={[Function]}
+      role="button"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={0}
+    >
+      <Calendar
+        close={[Function]}
+        dates={
+          Object {
+            "reservations": Object {},
+          }
+        }
+        fees={
+          Object {
+            "cleaningFee": 0,
+            "minNights": 0,
+            "nightlyFee": 0,
+            "serviceFee": 0,
+            "taxes": 0,
+          }
+        }
+        form={
+          Object {
+            "days": 0,
+            "in": "Add date",
+            "out": "Add date",
+          }
+        }
+        reserve={false}
+        setDates={[Function]}
+        setFees={[Function]}
+        setForm={[Function]}
+        setReserve={[Function]}
+      />
+    </div>
+    <div>
+      <button
+        data-testid="buttonGuestTest"
+        onClick={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "border": "none",
+            "borderRadius": "8px",
+            "display": "flex",
+            "justifyContent": "space-between",
+            "padding": "10px 15px",
+          }
+        }
+        type="button"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "fontSize": "10px",
+                "marginBottom": "5px",
+              }
+            }
+          >
+            GUESTS
+          </div>
+          <div
+            data-testid="numOfGuests"
+            style={
+              Object {
+                "fontFamily": "Montserrat, sans-serif",
+              }
+            }
+          >
+            2
+             
+            guests
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "fontSize": "16px",
+              "fontWeight": "lighter",
+            }
+          }
+        >
+          v
+        </div>
+      </button>
+      <div
+        data-testid="closeGuestTest"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <Guests
+          guests={
+            Object {
+              "adults": 2,
+              "children": 0,
+              "infants": 0,
+            }
+          }
+          setGuest={[Function]}
+          toggleGuests={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <button
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      style={
+        Object {
+          "backgroundImage": "linear-gradient(to right, #d93243, #d93275, #d93275)",
+        }
+      }
+      type="button"
+    >
+      <div
+        style={
+          Object {
+            "display": "inline",
+          }
+        }
+      >
+        Check Availability
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Guests should render Guests without crashing 1`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        <div>
+          Adults
+        </div>
+        <div>
+          <button
+            className="undefined undefined"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+          <div
+            data-testid="totAdults"
+          >
+            2
+          </div>
+          <button
+            className="undefined undefined"
+            data-testid="addAdults"
+            onClick={[Function]}
+            type="button"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            Children
+          </div>
+          <div
+            style={
+              Object {
+                "fontSize": "12px",
+                "marginTop": "5px",
+              }
+            }
+          >
+            Ages 2–12
+          </div>
+        </div>
+        <div>
+          <button
+            className="undefined undefined"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+          <div>
+            0
+          </div>
+          <button
+            className="undefined undefined"
+            data-testid="addChildren"
+            onClick={[Function]}
+            type="button"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            Infants
+          </div>
+          <div
+            style={
+              Object {
+                "fontSize": "12px",
+                "marginTop": "5px",
+              }
+            }
+          >
+            Under 2
+          </div>
+        </div>
+        <div>
+          <button
+            className="undefined undefined"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+          <div>
+            0
+          </div>
+          <button
+            className="undefined undefined"
+            onClick={[Function]}
+            type="button"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "fontSize": "13px",
+            "lineHeight": "20px",
+          }
+        }
+      >
+        4 guests maximum. Infants don’t count toward the number of guests.
+      </div>
+    </div>
+    <button
+      className="undefined undefined"
+      onClick={[Function]}
+      type="button"
+    >
+      Close
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Reservations should render Reservations without crashing 1`] = `
+<div>
+  <div>
+    <div>
       <div
         style={
           Object {
@@ -53,213 +661,105 @@ exports[`Reservations should render Reservations without crashing 1`] = `
 </div>
 `;
 
-exports[`Snapshots should render correctly in "debug" mode 1`] = `
+exports[`Summary should render Summary without crashing 1`] = `
 <div>
-  <div
-    className="form"
+  <button
+    onClick={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    style={Object {}}
+    type="button"
   >
-    <div>
-      <button
-        className="check"
-        onClick={[Function]}
-        style={
-          Object {
-            "borderBottom": "1px solid rgb(179, 179, 179)",
-          }
-        }
-        type="button"
-      >
-        <div
-          className="checkIn"
-        >
-          <div
-            style={
-              Object {
-                "fontSize": "10px",
-                "marginBottom": "5px",
-              }
-            }
-          >
-            CHECK-IN
-          </div>
-          <div
-            style={
-              Object {
-                "color": "rgb(125, 125, 125)",
-                "fontFamily": "Montserrat, sans-serif",
-              }
-            }
-          >
-            Add date
-          </div>
-        </div>
-        <div
-          className="checkOut"
-        >
-          <div
-            style={
-              Object {
-                "fontSize": "10px",
-                "marginBottom": "5px",
-              }
-            }
-          >
-            CHECKOUT
-          </div>
-          <div
-            style={
-              Object {
-                "color": "rgb(125, 125, 125)",
-                "fontFamily": "Montserrat, sans-serif",
-              }
-            }
-          >
-            Add date
-          </div>
-        </div>
-      </button>
-    </div>
-    <div
-      onKeyDown={[Function]}
-      role="button"
-      style={
-        Object {
-          "display": "none",
-        }
+    Reserve
+  </button>
+  <div
+    style={
+      Object {
+        "fontSize": "13px",
+        "margin": "20px 0px",
+        "textAlign": "center",
       }
-      tabIndex={0}
-    >
-      <Calendar
-        close={[Function]}
-        dates={
-          Object {
-            "reservations": Object {},
-          }
-        }
-        fees={
-          Object {
-            "cleaningFee": 0,
-            "minNights": 0,
-            "nightlyFee": 0,
-            "serviceFee": 0,
-            "taxes": 0,
-          }
-        }
-        form={
-          Object {
-            "days": 0,
-            "in": "Add date",
-            "out": "Add date",
-          }
-        }
-        reserve={false}
-        setDates={[Function]}
-        setFees={[Function]}
-        setForm={[Function]}
-        setReserve={[Function]}
-      />
-    </div>
+    }
+  >
+    You won't be charged yet
+  </div>
+  <div>
     <div>
-      <button
-        className="guestBut"
-        onClick={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "border": "none",
-            "borderRadius": "8px",
-            "display": "flex",
-            "justifyContent": "space-between",
-            "padding": "10px 15px",
-          }
-        }
-        type="button"
-      >
-        <div>
-          <div
-            style={
-              Object {
-                "fontSize": "10px",
-                "marginBottom": "5px",
-              }
-            }
-          >
-            GUESTS
-          </div>
-          <div
-            style={
-              Object {
-                "fontFamily": "Montserrat, sans-serif",
-              }
-            }
-          >
-            2
-             
-            guests
-          </div>
-        </div>
-        <div
-          style={
-            Object {
-              "fontSize": "16px",
-              "fontWeight": "lighter",
-            }
-          }
-        >
-          v
-        </div>
-      </button>
       <div
         style={
           Object {
-            "display": "none",
+            "textDecoration": "underline",
           }
         }
       >
-        <Guests
-          add={
-            Object {
-              "adults": [Function],
-              "chilren": [Function],
-              "infants": [Function],
-            }
+        $
+        0
+         
+        x
+         
+        0
+         
+        nights
+      </div>
+      <div>
+        $
+        0
+      </div>
+    </div>
+    <div>
+      <div
+        style={
+          Object {
+            "textDecoration": "underline",
           }
-          guests={
-            Object {
-              "adults": 2,
-              "children": 0,
-              "infants": 0,
-            }
+        }
+      >
+        Cleaning fee
+      </div>
+      <div>
+        $
+        0
+      </div>
+    </div>
+    <div>
+      <div
+        style={
+          Object {
+            "textDecoration": "underline",
           }
-          max={2}
-          toggleGuests={[Function]}
-        />
+        }
+      >
+        Service fee
+      </div>
+      <div>
+        $
+        30
+      </div>
+    </div>
+    <div>
+      <div
+        style={
+          Object {
+            "textDecoration": "underline",
+          }
+        }
+      >
+        Occupancy taxes and fees
+      </div>
+      <div>
+        $
+        20
       </div>
     </div>
   </div>
   <div>
-    <button
-      className="checkAvailabilityAndReserve"
-      onClick={[Function]}
-      onMouseLeave={[Function]}
-      onMouseMove={[Function]}
-      style={
-        Object {
-          "backgroundImage": "linear-gradient(to right, #d93243, #d93275, #d93275)",
-        }
-      }
-      type="button"
-    >
-      <div
-        style={
-          Object {
-            "display": "inline",
-          }
-        }
-      >
-        Check Availability
-      </div>
-    </button>
+    <div>
+      Total
+    </div>
+    <div>
+      $
+      50
+    </div>
   </div>
 </div>
 `;

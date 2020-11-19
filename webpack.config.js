@@ -1,70 +1,49 @@
 const path = require('path');
-const webpack = require('webpack');
-
-const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
-  entry: `${SRC_DIR}/index.jsx`,
+  entry: path.resolve(__dirname, 'client/src/index.jsx'),
   output: {
+    path: path.resolve(__dirname, 'client/dist'),
     filename: 'bundle.js',
-    path: DIST_DIR,
   },
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.(jsx|js)$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', {
+                targets: 'defaults',
+              }],
+              '@babel/preset-react',
+            ],
+          },
+        }],
+      },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: [/\.wexbim$/, /\.docx$/, /\.csv$/, /\.mp4$/, /\.xlsx$/, /\.doc$/, /\.avi$/, /\.webm$/, /\.mov$/, /\.mp3$/, /\.pdf$/],
-        use: [
-          'file-loader',
-        ],
-      },
-      {
-        test: /\.(png|jpg)$/,
-        use: [
-          'url-loader?limit=200000',
-        ],
-      },
-      {
-        test: /\.(gif)$/,
-        use: [
+        exclude: /node_modules/,
+        use: ['style-loader',
           {
-            loader: 'file-loader',
+            loader: 'css-loader',
             options: {
-              query: {
-                name: 'assets/[name].[ext]',
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
               },
             },
-          },
-        ],
-      },
-      {
-        test: /\.jsx\.html$/,
-        exclude: /node_modules/,
-        use: [
-          'babel!react-pure-html-component',
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'css-loader',
-        ],
+          }],
       },
     ],
   },
+  mode: 'development',
   resolve: {
-    extensions: ['.js', '.jsx', '.jsx.html'],
-    modules: [
-      path.join(__dirname, 'node_modules'),
-    ],
+    extensions: ['.js', '.jsx', '.json', '.css'],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
-  ],
 };
+
+// '.css'
+
+// include: path.resolve(__dirname, 'client/src'),

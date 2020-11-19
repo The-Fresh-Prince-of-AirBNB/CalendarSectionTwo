@@ -44,7 +44,9 @@ describe('Snapshots', () => {
 // Sections for all components
 describe('Reservations', () => {
   it('should render Reservations without crashing', () => {
-    shallow(<Reservations />);
+    const res = shallow(<Reservations />);
+    const resJson = JSON.stringify(res);
+    expect(res).toMatchSnapshot();
   });
 });
 
@@ -102,10 +104,21 @@ describe('Carousel', () => {
     const wrapper = mount(<Carousel testFunc={testFunc} />);
     expect(wrapper.props().testFunc(2, 3)).toEqual(5);
   });
+
+  // it('', () => {
+
+  // });
 });
 
 describe('Summary', () => {
   const form = { in: '11/23/2020', out: '11/27/2020', days: 4 };
+  const fees = {
+    nightlyFee: 150,
+    cleaningFee: 30,
+    serviceFee: 20,
+    taxes: 15,
+    minNights: 4,
+  };
 
   it('should render Summary without crashing', () => {
     shallow(<Summary />);

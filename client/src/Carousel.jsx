@@ -309,7 +309,7 @@ class Carousel extends React.Component {
               }
             }
           >
-            <div style={{ marginLeft: '30%', fontSize: '18px', marginBottom: '5px' }}>
+            <div className="titleTest" style={{ marginLeft: '30%', fontSize: '18px', marginBottom: '5px' }}>
               {months[next[0]]}
               {' '}
               {next[1]}
@@ -318,6 +318,7 @@ class Carousel extends React.Component {
               : (
                 <button
                   className="moveButton"
+                  data-testid="moveButtonTest"
                   onClick={() => this.changeDates('f')}
                   type="button"
                 >

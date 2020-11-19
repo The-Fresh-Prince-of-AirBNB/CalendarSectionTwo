@@ -1,5 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Reservations should render Reservations without crashing 1`] = `
+<div>
+  <div
+    className="box"
+  >
+    <div
+      className="nightlyFee"
+    >
+      <div
+        style={
+          Object {
+            "display": "inline",
+            "fontSize": "24px",
+            "fontWeight": "500",
+          }
+        }
+      >
+        $
+         
+        0
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline",
+          }
+        }
+      >
+         / night
+      </div>
+    </div>
+    <Form
+      dates={
+        Object {
+          "reservations": Object {},
+        }
+      }
+      fees={
+        Object {
+          "cleaningFee": 0,
+          "minNights": 0,
+          "nightlyFee": 0,
+          "serviceFee": 0,
+          "taxes": 0,
+        }
+      }
+      setDates={[Function]}
+      setFees={[Function]}
+    />
+  </div>
+</div>
+`;
+
 exports[`Snapshots should render correctly in "debug" mode 1`] = `
 <div>
   <div

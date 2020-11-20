@@ -109,7 +109,6 @@ describe('Guests', () => {
     const formWrapper = mount(<Form />);
     const guestWrapper = mount(<Guests />);
 
-    let numOfGuests = formWrapper.find({ 'data-testid': 'numOfGuests' });
     let totAdults = guestWrapper.find({ 'data-testid': 'totAdults' });
     const addAdultsBut = guestWrapper.find({ 'data-testid': 'addAdults' });
     const addChildrenBut = guestWrapper.find({ 'data-testid': 'addChildren' });
@@ -128,6 +127,15 @@ describe('Guests', () => {
     guestWrapper.update();
     totAdults = guestWrapper.find({ 'data-testid': 'totAdults' });
     expect(totAdults.text()).toBe('4');
+  });
+
+  it('calls a function in Form that renders the form', () => {
+    const mock = jest.fn();
+    const wrapper = shallow(<Guests setGuest={mock} />);
+    const addAdultBut = wrapper.find({ 'data-testid': 'addAdults' });
+
+    addAdultBut.simulate('click');
+    expect(mock).toHaveBeenCalled();
   });
 });
 
@@ -158,9 +166,16 @@ describe('Carousel', () => {
     expect(wrapper.props().testFunc(2, 3)).toEqual(5);
   });
 
-  // it('', () => {
+  it('Calls the API call function on page load', () => {
+    const spy = jest.spyOn(Carousel.prototype, 'getExisting');
+    const wrapper = mount(<Carousel />);
+    wrapper.instance().getExisting();
+    expect(spy).toHaveBeenCalled();
 
-  // });
+    afterEach(() => {
+      spy.mockClear();
+    });
+  });
 });
 
 describe('Summary', () => {

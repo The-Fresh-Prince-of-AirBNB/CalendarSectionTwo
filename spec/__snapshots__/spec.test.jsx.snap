@@ -155,6 +155,7 @@ exports[`Carousel should render Carousel without crashing 1`] = `
          
       </div>
       <div
+        data-testid="firstMonth"
         style={
           Object {
             "fontSize": "18px",

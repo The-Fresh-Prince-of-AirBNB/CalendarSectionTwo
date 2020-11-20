@@ -45,7 +45,7 @@ const Calendar = (props) => {
 
   const handleBook = (m, d, y, out) => {
     const stringDate = `${m + 1}/${d}/${y}`;
-    if (m && !out) {
+    if ((m && !out) || (m === 0 && !out)) {
       setBook({ start: stringDate, end: '' });
       setForm({ in: stringDate, out: 'Add date', days: 0 });
       setBox('checkOut');

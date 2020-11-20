@@ -130,6 +130,7 @@ class Carousel extends React.Component {
       daysBefore = true;
     }
     const minDays = [false, 0];
+
     for (let i = 1; i <= (new Date(y, m + 1, 0).getDate()); i += 1) {
       if (lead) {
         daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
@@ -248,8 +249,11 @@ class Carousel extends React.Component {
   clearReservation() {
     const { handleBook } = this.props;
     this.setState({
+      date: [0, 0],
+      next: [1, 0],
       checkIn: [],
       checkOut: [],
+      range: 0,
     });
     this.getExisting();
     handleBook(null);
@@ -280,7 +284,7 @@ class Carousel extends React.Component {
                   &lt;
                 </button>
               )}
-            <div style={{ marginRight: '30%', fontSize: '18px', marginBottom: '5px' }}>
+            <div data-testid="firstMonth" style={{ marginRight: '30%', fontSize: '18px', marginBottom: '5px' }}>
               {months[date[0]]}
               {' '}
               {date[1]}

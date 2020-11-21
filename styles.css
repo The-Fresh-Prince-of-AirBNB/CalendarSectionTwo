@@ -1,0 +1,404 @@
+/* @import "compass/css3"; */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/*
+  Box Styling
+  ==============================================
+*/
+
+.box {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+  margin-right: 5%;
+  width: 22%;
+  padding: 24px;
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  border-radius: 12px;
+}
+
+.nightlyFee {
+  margin-bottom: 24px;
+}
+
+/*
+  Form Styling
+  ==============================================
+*/
+
+.form {
+  border: 1px solid rgb(179, 179, 179);
+  border-radius: 8px;
+  width: 100%
+}
+
+.calCheckInput:focus {
+  outline: none;
+}
+
+.check:focus {
+  outline: none;
+}
+
+.check {
+  display: flex;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.checkIn {
+  padding: 10px;
+  border-right: 1px solid rgb(179, 179, 179);
+  width: 49%;
+  white-space: nowrap
+}
+
+.checkOut {
+  padding: 10px 16px;
+  width: 49%;
+  white-space: nowrap;
+}
+
+.guestBut {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.checkAvailabilityAndReserve {
+  transition: all .2s ease;
+  margin-top: 16px;
+  border: none;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.checkAvailabilityAndReserve:active {
+  padding: 13px;
+  font-size: 15px;
+  width: 96%;
+  margin: 18px 0px 3px 0px;
+  margin-left: 2%;
+}
+
+.checkAvailabilityAndReserve:focus {
+  outline: none;
+}
+
+
+
+/*
+  Popups/Modals
+  ==============================================
+*/
+
+
+/* Calendar */
+.calendar {
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  top: 112px;
+  right: 5%;
+  border-radius: 14px;
+  padding: 20px 30px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 16px 8px;
+}
+
+.calendarContent {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  height: auto;
+  width: 680px;
+}
+
+.closeCalendar {
+  transition: all .2s ease;
+  margin-top: 20px;
+  cursor: pointer;
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.closeCalendar:focus {
+  outline: none;
+}
+
+.closeCalendar:active {
+  font-size: 12px;
+  padding: 9px 14px;
+  margin: 21px 4px 1px 1px;
+}
+
+.clearCalendar {
+  transition: all .2s ease;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  margin-right: 5px;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.clearCalendar:hover {
+  cursor: pointer;
+  background: rgb(235, 235, 235);
+}
+
+.clearCalendar:focus {
+  outline: none;
+}
+
+.clearCalendar:active{
+  padding: 10px 18px;
+  font-size: 12px;
+ }
+
+.calForm {
+  display: flex;
+  width: 47%;
+  border-radius: 8px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.calCheckIn {
+  padding: 10px 0px 10px 16px;
+}
+
+.calCheckOut {
+  padding: 10px 0px 10px 13px;
+}
+
+.mask {
+  background: rgb(245, 245, 245);
+  color: rgb(185, 185, 185);
+  width: 50%;
+  line-height: 15px;
+}
+
+.xButton {
+  background: none;
+  border: none;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.xButton:focus {
+  outline: none;
+}
+
+/*
+  Carousel
+  ==============================================
+*/
+
+.carousel {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.calCarousel {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.day {
+  padding: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 50%;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid white;
+}
+
+.passDay {
+  color: rgb(143, 143, 143);
+}
+
+.resDay {
+  color: rgb(173, 173, 173);
+  text-decoration: line-through;
+}
+
+.bookDay {
+  color: white;
+  background: black;
+}
+
+.afterDay:hover {
+  background: rgb(224, 224, 224);
+}
+
+.calDay:hover {
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.betweenDay {
+  border: 1px solid rgb(235, 235, 235);
+  background: rgb(235, 235, 235);
+}
+
+table {
+  margin-top: 20px
+}
+
+.moveButton {
+  border-radius: 50%;
+  padding: 5px;
+  background: none;
+  border: none;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.moveButton:hover {
+  background: rgb(235, 235, 235);
+}
+
+.moveButton:focus {
+  outline: none;
+}
+
+/*
+  Guests
+  ==============================================
+*/
+
+.guests {
+  position: fixed;
+  background: none;
+  width: 370px;
+  top: 242px;
+  right: 5.2%;
+  height: 400px;
+}
+
+.guestsContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+  padding-right: 10px;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(221, 221, 221);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  padding: 0px 5px 20px 15px;
+}
+
+.closeGuests {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.closeGuests:active {
+  margin-right: 5px;
+  margin-bottom: 4px;
+}
+
+.guestType {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0px;
+  font-size: 18px;
+}
+
+.guestTypeForm {
+  display: flex;
+  justify-content: row;
+  align-items: center;
+}
+
+.guestFormBut {
+  margin: 0px 15px;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 20px;
+}
+
+.guestBut:focus {
+  outline: none;
+}
+
+.guestFormBut:focus {
+  outline: none;
+}
+
+.nonZero {
+  color: rgb(114, 114, 114);
+  background: none;
+  cursor: pointer;
+  border: 1px solid rgb(173, 173, 173);
+}
+
+.nonZero:hover {
+  color: black;
+  border: 1px solid black;
+}
+
+.zero {
+  background: rgb(247, 247, 247);
+  color: rgb(226, 226, 226);
+  border: 1px solid rgb(226, 226, 226);
+}
+
+/*
+  Summary
+  ==============================================
+*/
+
+.summaryItems {
+  margin: 15px 0px;
+  font-size: 15px;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  line-height: 30px;
+}
+
+.total {
+  border-top: 1px solid rgb(209, 209, 209);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 30px 0px 5px 0px;
+  font-size: 18px;
+  font-weight: 600;
+}

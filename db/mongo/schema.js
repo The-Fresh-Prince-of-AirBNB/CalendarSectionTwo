@@ -1,14 +1,11 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var reservationSchema = mongoose.Schema({
-  booked: [String],
-  adults: Number,
-  children: Number,
-  infants: Number,
-  totalCost: Number
+const reservationSchema = mongoose.Schema({
+  start: [Number],
+  end: [Number],
 });
 
-var listingSchema = mongoose.Schema({
+const listingSchema = mongoose.Schema({
   id: Number,
   nightlyFee: Number,
   cleaningFee: Number,
@@ -16,7 +13,20 @@ var listingSchema = mongoose.Schema({
   taxes: Number,
   minNights: Number,
   rareFind: Boolean,
-  reservations: [reservationSchema]
+  reservations: {
+    December: reservationSchema,
+    January: reservationSchema,
+    February: reservationSchema,
+    March: reservationSchema,
+    April: reservationSchema,
+    May: reservationSchema,
+    June: reservationSchema,
+    July: reservationSchema,
+    August: reservationSchema,
+    September: reservationSchema,
+    October: reservationSchema,
+    November: reservationSchema,
+  },
 });
 
 module.exports = mongoose.model('ListingModel', listingSchema);

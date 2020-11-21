@@ -1,4 +1,76 @@
-module.exports = [
+const allDates = [];
+
+const getDates = () => {
+  const minNights = Math.floor(Math.random() * (5 - 2) + 2);
+  const start = Math.floor(Math.random() * 25);
+  return [minNights, start, start + minNights];
+};
+
+for (let i = 0; i < 100; i += 1) {
+  const nightly = Math.floor(Math.random() * (400 - 90) + 90);
+  const dates = getDates();
+  const dummy = {
+    id: i,
+    nightlyFee: nightly,
+    cleaningFee: nightly * 0.25,
+    serviceFee: nightly * (0.25 / 2),
+    taxes: nightly * (0.25 / 4),
+    minNights: dates[0],
+    reservations: {
+      December: {
+        start: [2020, 11, dates[1]],
+        end: [2020, 11, dates[2]],
+      },
+      January: {
+        start: [2021, 0, dates[1]],
+        end: [2021, 0, dates[2]],
+      },
+      February: {
+        start: [2021, 1, dates[1]],
+        end: [2021, 1, dates[2]],
+      },
+      March: {
+        start: [2021, 2, dates[1]],
+        end: [2021, 2, dates[2]],
+      },
+      April: {
+        start: [2021, 3, dates[1]],
+        end: [2021, 3, dates[2]],
+      },
+      May: {
+        start: [2021, 4, dates[1]],
+        end: [2021, 4, dates[2]],
+      },
+      June: {
+        start: [2021, 5, dates[1]],
+        end: [2021, 5, dates[2]],
+      },
+      July: {
+        start: [2021, 6, dates[1]],
+        end: [2021, 6, dates[2]],
+      },
+      August: {
+        start: [2021, 7, dates[1]],
+        end: [2021, 7, dates[2]],
+      },
+      September: {
+        start: [2021, 8, dates[1]],
+        end: [2021, 8, dates[2]],
+      },
+      October: {
+        start: [2021, 9, dates[1]],
+        end: [2021, 9, dates[2]],
+      },
+      November: {
+        start: [2021, 10, dates[1]],
+        end: [2021, 10, dates[2]],
+      },
+    },
+  };
+  allDates.push(dummy);
+}
+
+const dummyOne = [
   {
     id: 0,
     nightlyFee: 203,
@@ -10,10 +82,10 @@ module.exports = [
     reservations: [
       {
         booked: ['2020-12-11', '2020-12-12', '2020-12-13'],
-        adults: 2,
-        children: 0,
-        infants: 1,
-        totalCost: 528.20,
+        // adults: 2,
+        // children: 0,
+        // infants: 1,
+        // totalCost: 528.20,
       },
       {
         booked: ['2021-01-13', '2021-01-14', '2021-01-15', '2021-01-16'],
@@ -36,10 +108,10 @@ module.exports = [
     reservations: [
       {
         booked: ['2020-12-05', '2020-12-06', '2020-12-07'],
-        adults: 3,
-        children: 0,
-        infants: 0,
-        totalCost: 420.97,
+        // adults: 3,
+        // children: 0,
+        // infants: 0,
+        // totalCost: 420.97,
       },
       {
         booked: ['2021-01-01', '2021-01-02', '2021-01-03', '2021-01-04'],
@@ -2627,3 +2699,5 @@ module.exports = [
     ],
   },
 ];
+
+module.exports = allDates;

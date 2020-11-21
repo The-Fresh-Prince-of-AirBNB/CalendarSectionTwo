@@ -1,10 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 const db = require('../mongo/db.js');
 const ListingModel = require('../mongo/schema.js');
 
 module.exports = {
   getOne: (id, callback) => {
-    console.log(id);
-    ListingModel.findOne({ id: id.id }, (err, results) => {
+    ListingModel.findOne({ id }, (err, results) => {
       if (err) {
         console.log('error retrieving data at that id');
         callback(err);

@@ -2,7 +2,8 @@ const model = require('../model/model.js');
 
 module.exports = {
   get: (req, res) => {
-    model.getOne(req.params, (err, results) => {
+    const url = (req.baseUrl).split('/');
+    model.getOne(url[url.length - 1], (err, results) => {
       if (err) {
         res.sendStatus(404);
       } else {
@@ -13,7 +14,7 @@ module.exports = {
   },
 
   post: (req, res) => {
-    const find = { id: 24, reservationInfo: 'placeholder' };
+    const find = req.body;
     model.makeReservation(find, (err, result) => {
       if (err) {
         res.sendStatus(400);

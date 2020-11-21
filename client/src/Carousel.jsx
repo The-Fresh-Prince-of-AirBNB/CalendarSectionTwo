@@ -31,7 +31,8 @@ class Carousel extends React.Component {
 
   getExisting() {
     const { setFees, setDates } = this.props;
-    axios.get('/api/homes/21/calendar')
+    console.log(window.location);
+    axios.get(`${window.location.pathname}/reservations`)
       .then((response) => {
         setFees({
           nightlyFee: response.data.nightlyFee,
@@ -68,8 +69,8 @@ class Carousel extends React.Component {
   changeDates(dir) {
     const { dates } = this.props;
     const { date, next, range } = this.state;
-    const lastMonthYear = dates.reservations[0][months[date[0]]].start[0];
-    const nextMonthYear = dates.reservations[0][months[next[0]]].start[0];
+    const lastMonthYear = dates.reservations[months[date[0]]].start[0];
+    const nextMonthYear = dates.reservations[months[next[0]]].start[0];
 
     if (dir === 'f' && date[0] === 10 && nextMonthYear === next[1]) {
       this.setState({
@@ -113,7 +114,7 @@ class Carousel extends React.Component {
   generateCal(y, m, d, first, trail, lead) {
     const { dates, fees } = this.props;
     const { checkIn, carousel } = this.state;
-    const res = dates.reservations[0][months[m]];
+    const res = dates.reservations[months[m]];
     // Create an array of the empty days on the first week of the month
     const emptyDays = [];
     for (let i = 0; i < (new Date(y, m)).getDay(); i += 1) {

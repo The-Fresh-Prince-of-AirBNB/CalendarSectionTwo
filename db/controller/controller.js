@@ -2,7 +2,8 @@ const model = require('../model/model.js');
 
 module.exports = {
   get: (req, res) => {
-    model.getOne(req.params, (err, results) => {
+    const url = (req.baseUrl).split('/');
+    model.getOne(url[url.length - 1], (err, results) => {
       if (err) {
         res.sendStatus(404);
       } else {

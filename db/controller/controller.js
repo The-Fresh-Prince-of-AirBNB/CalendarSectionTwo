@@ -3,7 +3,7 @@ const model = require('../model/model.js');
 module.exports = {
   get: (req, res) => {
     const url = (req.baseUrl).split('/');
-    model.getOne(url[url.length - 1], (err, results) => {
+    model.getOne(url[1], (err, results) => {
       if (err) {
         res.sendStatus(404);
       } else {

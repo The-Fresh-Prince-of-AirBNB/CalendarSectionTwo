@@ -31,8 +31,7 @@ class Carousel extends React.Component {
 
   getExisting() {
     const { setFees, setDates } = this.props;
-    console.log(window.location);
-    axios.get(`${window.location.pathname}/reservations`)
+    axios.get(`${window.location.pathname}reservations`)
       .then((response) => {
         setFees({
           nightlyFee: response.data.nightlyFee,
@@ -131,17 +130,17 @@ class Carousel extends React.Component {
       daysBefore = true;
     }
     const minDays = [false, 0];
-
     for (let i = 1; i <= (new Date(y, m + 1, 0).getDate()); i += 1) {
+      const key = y.toString() + m.toString() + i.toString();
       if (lead) {
-        daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`}>{i}</td>);
         continue;
       // greys out all previous days until the current day
       }
       if (res) {
         if (res.start[2] <= i && res.end[2] >= i && res.start[0] === y) {
           daysUntilNextReservation = false;
-          daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
+          daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`}>{i}</td>);
           if (d) {
             daysAfterNextReservation = true;
           }
@@ -150,10 +149,10 @@ class Carousel extends React.Component {
       }
       // greys out all previous days until the current day
       if ((today[0] > i && today[1] === m)) {
-        daysInTheMonth.push(<td className={`${styles.day} ${styles.passDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.passDay}`}>{i}</td>);
       // greys out the next n days correlating to the minumum stay
       } else if (minDays[0]) {
-        daysInTheMonth.push(<td className={`${styles.day} ${styles.passDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.passDay}`}>{i}</td>);
         minDays[1] += 1;
         if (minDays[1] >= fees.minNights - 1) {
           daysUntilNextReservation = true;
@@ -162,30 +161,30 @@ class Carousel extends React.Component {
       // if theres a day passed in the first time, make that day a checkin reservation day
       } else if (d === i && !first) {
         daysBefore = false;
-        daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         minDays[0] = true;
       // the final booking
       } else if (d === i && trail) {
-        daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         daysBetween = false;
       // if there is already a check in date
       } else if (checkIn[0] === i && checkIn[1] === m && checkIn[2] === y) {
-        daysInTheMonth.push(<td className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         daysBetween = true;
       // marks the days between the two checkin dates
       } else if (daysBetween) {
-        daysInTheMonth.push(<td className={`${styles.day} ${styles.betweenDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.betweenDay}`}>{i}</td>);
         daysBetween = true;
       // if the days are before the next reservation, push available calendar days
       } else if (!daysAfterNextReservation) {
         if (daysBefore && !first) {
-          daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
+          daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`}>{i}</td>);
         } else {
-          daysInTheMonth.push(<td role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? `${styles.day} ${styles.calDay} ${styles.afterDay}` : `${styles.day} ${styles.calDay}`}>{i}</td>);
+          daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? `${styles.day} ${styles.calDay} ${styles.afterDay}` : `${styles.day} ${styles.calDay}`}>{i}</td>);
         }
       // else push non-available days
       } else {
-        daysInTheMonth.push(<td className={`${styles.day} ${styles.resDay}`}>{i}</td>);
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`}>{i}</td>);
       }
     }
     const total = emptyDays.concat(daysInTheMonth);
@@ -291,7 +290,7 @@ class Carousel extends React.Component {
               {date[1]}
             </div>
           </div>
-          <table className={styles.table}>
+          <table className={`${styles.table} ${styles.slide}`}>
             <thead>
               <tr style={{ color: 'rgb(129, 129, 129)' }}>
                 <th>Su</th>

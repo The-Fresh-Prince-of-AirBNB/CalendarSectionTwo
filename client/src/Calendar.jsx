@@ -19,6 +19,7 @@ const Calendar = (props) => {
   const checkInRef = useRef(null);
   const [placeholders, setPlaceholders] = useState({ checkIn: 'Add date', checkOut: 'Add date' });
   const [book, setBook] = useState({ start: '', end: '' });
+  const [change, setChange] = useState({ s: '', e: '' });
   const [box, setBox] = useState('checkIn');
 
   const toggleCheckin = (event) => {
@@ -46,15 +47,18 @@ const Calendar = (props) => {
   const handleBook = (m, d, y, out) => {
     const stringDate = `${m + 1}/${d}/${y}`;
     if ((m && !out) || (m === 0 && !out)) {
+      setChange({ s: stringDate, e: '' });
       setBook({ start: stringDate, end: '' });
       setForm({ in: stringDate, out: 'Add date', days: 0 });
       setBox('checkOut');
     } else if (out) {
       const totDays = countDays(book.start, stringDate);
+      setChange({ s: change.s, e: stringDate });
       setBook({ start: book.start, end: stringDate });
       setForm({ in: form.in, out: stringDate, days: totDays });
       setReserve(!reserve);
     } else {
+      setChange({ s: '', e: '' });
       setBook({ start: '', end: '' });
       setForm({ in: 'Add date', out: 'Add date' });
       setBox('checkIn');
@@ -62,19 +66,20 @@ const Calendar = (props) => {
     }
   };
 
-  const handleChange = (e, type) => {
-    e.preventDefault();
+  const handleChange = (event, type) => {
+    // const [change, setChange] = useState({ startChange: '', endChange: '' });
+    event.preventDefault();
     if (type === 's') {
-      setBook({ start: e.target.value, end: book.end });
+      setChange({ s: event.target.value, e: change.e });
     } else {
-      setBook({ start: book.start, end: e.target.value });
+      setChange({ s: change.s, e: event.target.value });
     }
   };
 
   const handleSumbit = (e) => {
     e.preventDefault();
-    if (book.start.length > 0) {
-      console.log(book.start);
+    if (change.s.length > 0) {
+      console.log(change.s);
     }
   };
 
@@ -100,7 +105,7 @@ const Calendar = (props) => {
       >
         <div>
           <div style={{ fontSize: '10px', marginBottom: '3px' }}>CHECKOUT</div>
-          <input type="text" className={styles.calCheckInput} style={{ border: 'none', width: '70%', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkOut} onClick={() => toggleCheckin} value={book.end} onChange={(e) => handleChange(e, 'e')} />
+          <input type="text" className={styles.calCheckInput} style={{ border: 'none', width: '70%', fontFamily: 'Montserrat, sans-serif' }} placeholder={placeholders.checkOut} onClick={() => toggleCheckin} value={change.e} onChange={(e) => handleChange(e, 'e')} />
         </div>
       </div>
     );
@@ -116,7 +121,7 @@ const Calendar = (props) => {
             }}
             placeholder={placeholders.checkIn}
             onClick={() => toggleCheckin}
-            value={book.start}
+            value={change.s}
             onChange={(e) => handleChange(e, 's')}
           />
         </div>
@@ -151,7 +156,7 @@ const Calendar = (props) => {
           }
             placeholder={placeholders.checkIn}
             onClick={() => toggleCheckin}
-            value={book.start}
+            value={change.s}
             onChange={(e) => handleChange(e, 's')}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -168,13 +173,11 @@ const Calendar = (props) => {
     <div className={styles.calendar}>
       <div className={styles.calendarContent}>
         <div>
-          <div style={{ fontSize: '22px' }}>Select Dates</div>
+          <div style={{ fontSize: '22px' }}>
+            {form.out === 'Add date' ? 'Select dates' : `${form.days} nights`}
+          </div>
           <div style={{ color: 'rgb(160, 160, 160)', marginTop: '8px' }}>
-            Minimum stay:
-            {' '}
-            {fees.minNights}
-            {' '}
-            nights
+            {form.out === 'Add date' ? `Minimum stay: ${fees.minNights} nights` : `${form.in} - ${form.out}`}
           </div>
         </div>
         <form className={styles.calForm}>
@@ -189,6 +192,9 @@ const Calendar = (props) => {
             fees={fees}
             close={close}
             handleBook={handleBook}
+            change={change}
+            setChange={setChange}
+            book={book}
           />
         </div>
       </div>

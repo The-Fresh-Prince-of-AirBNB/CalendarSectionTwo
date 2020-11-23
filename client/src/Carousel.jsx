@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from '../../styles.css';
+// eslint-disable-next-line import/extensions
 import CalTable from './CalTable.jsx';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -13,12 +14,10 @@ class Carousel extends React.Component {
     super(props);
     this.state = {
       date: [0, 0],
-      next: [1, 0],
       carousel: {},
       checkIn: [],
       checkOut: [],
       range: 0,
-      position: 0,
     };
     this.generateCal = this.generateCal.bind(this);
     this.changeDates = this.changeDates.bind(this);
@@ -29,6 +28,33 @@ class Carousel extends React.Component {
 
   componentDidMount() {
     this.getExisting();
+  }
+
+  componentDidUpdate() {
+    const { change, book } = this.props;
+    const { carousel } = this.state;
+    const splitDate = change.s.split('/');
+    if (splitDate.length === 3 && splitDate[2].length === 4 && book.start === '') {
+      const d = Number.parseInt(splitDate[1], 10);
+      const m = Number.parseInt(splitDate[0], 10) - 1;
+      const y = Number.parseInt(splitDate[2], 10);
+      if ((d > 0 && d <= 31) && (m >= 0 && m <= 11) && (y >= 2020)) {
+        const carMonth = carousel[months[m]];
+        for (let i = 0; i < carMonth.length; i += 1) {
+          const carDays = carMonth[i].props.children;
+          for (let j = 0; j < carDays.length; j += 1) {
+            if (carDays[j]) {
+              const classes = carDays[j].props.className;
+              if (!classes.includes('resDay') && !classes.includes('passDay')) {
+                if (carDays[j].props.children === d) {
+                  this.makeReservation(d, m, y);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   getExisting() {
@@ -51,7 +77,6 @@ class Carousel extends React.Component {
         let month = new Date().getMonth();
         this.setState({
           date: [month, year],
-          next: [month + 1, year],
         });
         for (let i = 0; i < 12; i += 1) {
           if (month === 12) {
@@ -68,10 +93,7 @@ class Carousel extends React.Component {
   }
 
   changeDates(dir) {
-    const { dates } = this.props;
-    const { date, next, range } = this.state;
-    const lastMonthYear = dates.reservations[months[date[0]]].start[0];
-    const nextMonthYear = dates.reservations[months[next[0]]].start[0];
+    const { range } = this.state;
 
     if (dir === 'f') {
       this.setState({
@@ -224,7 +246,6 @@ class Carousel extends React.Component {
     const { handleBook } = this.props;
     this.setState({
       date: [0, 0],
-      next: [1, 0],
       checkIn: [],
       checkOut: [],
       range: 0,
@@ -318,10 +339,13 @@ Carousel.defaultProps = {
     taxes: 0,
     minNights: 0,
   },
+  change: { s: '', e: '' },
+  book: { start: '', end: '' },
   close: () => null,
   setFees: () => null,
   setDates: () => null,
   handleBook: () => null,
+  setChange: () => null,
 };
 
 Carousel.propTypes = {
@@ -333,10 +357,13 @@ Carousel.propTypes = {
     taxes: 0,
     minNights: 0,
   }),
+  change: PropTypes.shape({ s: '', e: '' }),
+  book: PropTypes.shape({ start: '', end: '' }),
   close: PropTypes.func,
   setFees: PropTypes.func,
   setDates: PropTypes.func,
   handleBook: PropTypes.func,
+  setChange: PropTypes.func,
 };
 
 export default Carousel;

@@ -126,7 +126,7 @@ body {
   flex-wrap: wrap;
   position: relative;
   height: auto;
-  width: 680px;
+  width: 665px;
 }
 
 .closeCalendar {
@@ -215,9 +215,14 @@ body {
 
 .carousel {
   display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
+  /* justify-content: flex-end; */
+  /* flex-wrap: wrap; */
+  z-index: 999;
   font-size: 12px;
+}
+
+.calendarTable {
+  position: relative
 }
 
 .calCarousel {
@@ -267,6 +272,12 @@ body {
 
 table {
   margin-top: 20px
+}
+
+.moveButtonCont {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px;
 }
 
 .moveButton {
@@ -319,7 +330,6 @@ table {
 }
 
 .closeGuests {
-  margin-top: 20px;
   font-size: 16px;
 }
 

@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from '../../styles.css';
+import CalTable from './CalTable.jsx';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -17,6 +18,7 @@ class Carousel extends React.Component {
       checkIn: [],
       checkOut: [],
       range: 0,
+      position: 0,
     };
     this.generateCal = this.generateCal.bind(this);
     this.changeDates = this.changeDates.bind(this);
@@ -71,40 +73,12 @@ class Carousel extends React.Component {
     const lastMonthYear = dates.reservations[months[date[0]]].start[0];
     const nextMonthYear = dates.reservations[months[next[0]]].start[0];
 
-    if (dir === 'f' && date[0] === 10 && nextMonthYear === next[1]) {
+    if (dir === 'f') {
       this.setState({
-        date: [date[0] + 1, date[1]],
-        next: [0, next[1] + 1],
         range: range + 1,
       });
-    } else if (dir === 'f' && date[0] === 11 && nextMonthYear === next[1]) {
+    } else {
       this.setState({
-        date: [0, date[1] + 1],
-        next: [next[0] + 1, next[1]],
-        range: range + 1,
-      });
-    } else if (dir === 'f' && nextMonthYear === next[1]) {
-      this.setState({
-        date: [date[0] + 1, date[1]],
-        next: [next[0] + 1, next[1]],
-        range: range + 1,
-      });
-    } else if (dir === 'b' && date[0] === 0 && lastMonthYear === date[1]) {
-      this.setState({
-        date: [11, date[1] - 1],
-        next: [next[0] - 1, next[1]],
-        range: range - 1,
-      });
-    } else if (dir === 'b' && next[0] === 0 && lastMonthYear === date[1]) {
-      this.setState({
-        date: [date[0] - 1, date[1]],
-        next: [11, next[1] - 1],
-        range: range - 1,
-      });
-    } else if (lastMonthYear === date[1]) {
-      this.setState({
-        date: [date[0] - 1, date[1]],
-        next: [next[0] - 1, next[1]],
         range: range - 1,
       });
     }
@@ -262,92 +236,67 @@ class Carousel extends React.Component {
   render() {
     const { close } = this.props;
     const {
-      date, next, carousel, range,
+      date, carousel, range,
     } = this.state;
+    const carArray = Object.values(carousel);
+    let i = -1;
+    const list = carArray.map(() => {
+      i += 1;
+      // if (date[0] + i === 12) {
+      //   this.setState({ date: [0, date[1] + 1] });
+      // }
+      return (
+        <CalTable
+          range={range}
+          changeDates={this.changeDates}
+          months={months}
+          date={[date[0] + i, date[1]]}
+          carousel={carousel}
+          carArray={carArray[i]}
+        />
+      );
+    });
 
     return (
-      <div className={styles.carousel}>
-        <div style={{ marginRight: '4.5%' }}>
-          <div style={
-              {
-                display: 'flex', justifyContent: 'space-between', marginTop: '10px', alignItems: 'flex-end',
-              }
-            }
-          >
-            {range === 0 ? (<div style={{ height: '32px', width: '32px' }}> </div>)
-              : (
-                <button
-                  className={styles.moveButton}
-                  onClick={() => this.changeDates('b')}
-                  type="button"
-                >
-                  &lt;
-                </button>
-              )}
-            <div data-testid="firstMonth" style={{ marginRight: '30%', fontSize: '18px', marginBottom: '5px' }}>
-              {months[date[0]]}
-              {' '}
-              {date[1]}
-            </div>
-          </div>
-          <table className={`${styles.table} ${styles.slide}`}>
-            <thead>
-              <tr style={{ color: 'rgb(129, 129, 129)' }}>
-                <th>Su</th>
-                <th>Mo</th>
-                <th>Tu</th>
-                <th>We</th>
-                <th>Th</th>
-                <th>Fr</th>
-                <th>Sa</th>
-              </tr>
-            </thead>
-            <tbody>
-              {carousel[months[date[0]]]}
-            </tbody>
-          </table>
+      <div style={{ overflow: 'hidden' }}>
+        <div className={styles.moveButtonCont}>
+          {range === 0 ? (<div style={{ height: '32px', width: '32px' }}> </div>)
+            : (
+              <button
+                className={styles.moveButton}
+                onClick={() => this.changeDates('b')}
+                type="button"
+              >
+                &lt;
+              </button>
+            )}
+          {range === 10 ? ''
+            : (
+              <button
+                className={styles.moveButton}
+                onClick={() => this.changeDates('f')}
+                type="button"
+              >
+                &gt;
+              </button>
+            )}
         </div>
-        <div>
+        <br />
+        <div className={styles.carousel}>
           <div style={
-              {
-                display: 'flex', justifyContent: 'space-between', marginTop: '10px', alignItems: 'flex-end',
-              }
+            {
+              display: 'flex',
+              overflow: 'hidden',
+              marginLeft: `${-345 * range}px`,
+              position: 'relative',
+              transition: 'all .3s ease',
             }
+          }
           >
-            <div className={styles.titleTest} style={{ marginLeft: '30%', fontSize: '18px', marginBottom: '5px' }}>
-              {months[next[0]]}
-              {' '}
-              {next[1]}
-            </div>
-            {range === 10 ? ''
-              : (
-                <button
-                  className={styles.moveButton}
-                  onClick={() => this.changeDates('f')}
-                  type="button"
-                >
-                  &gt;
-                </button>
-              )}
+            {list}
           </div>
-          <table className={styles.table}>
-            <thead>
-              <tr style={{ color: 'rgb(129, 129, 129)' }}>
-                <th>Su</th>
-                <th>Mo</th>
-                <th>Tu</th>
-                <th>We</th>
-                <th>Th</th>
-                <th>Fr</th>
-                <th>Sa</th>
-              </tr>
-            </thead>
-            <tbody>
-              {carousel[months[next[0]]]}
-            </tbody>
-          </table>
         </div>
-        <div>
+        <div style={{ float: 'right' }}>
           <button className={styles.clearCalendar} type="button" onClick={() => this.clearReservation()}>Clear dates</button>
           <button className={styles.closeCalendar} type="button" onClick={close}>Close</button>
         </div>
@@ -387,3 +336,5 @@ Carousel.propTypes = {
 };
 
 export default Carousel;
+
+// style={{ marginRight: '4.5%' }}

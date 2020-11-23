@@ -193,7 +193,6 @@ const Calendar = (props) => {
             close={close}
             handleBook={handleBook}
             change={change}
-            setChange={setChange}
             book={book}
           />
         </div>

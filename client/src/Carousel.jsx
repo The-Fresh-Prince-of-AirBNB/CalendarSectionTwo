@@ -33,23 +33,34 @@ class Carousel extends React.Component {
   componentDidUpdate() {
     const { change, book } = this.props;
     const { carousel } = this.state;
-    const splitDate = change.s.split('/');
-    if (splitDate.length === 3 && splitDate[2].length === 4 && book.start === '') {
-      const d = Number.parseInt(splitDate[1], 10);
-      const m = Number.parseInt(splitDate[0], 10) - 1;
-      const y = Number.parseInt(splitDate[2], 10);
+    const startDate = change.s.split('/');
+    const endDate = change.e.split('/');
+    if (startDate.length === 3 && startDate[2].length === 4 && book.start === '') {
+      const d = Number.parseInt(startDate[1], 10);
+      const m = Number.parseInt(startDate[0], 10) - 1;
+      const y = Number.parseInt(startDate[2], 10);
       if ((d > 0 && d <= 31) && (m >= 0 && m <= 11) && (y >= 2020)) {
-        const carMonth = carousel[months[m]];
-        for (let i = 0; i < carMonth.length; i += 1) {
-          const carDays = carMonth[i].props.children;
+        for (let i = 0; i < carousel[months[m]].length; i += 1) {
+          const carDays = carousel[months[m]][i].props.children;
           for (let j = 0; j < carDays.length; j += 1) {
-            if (carDays[j]) {
-              const classes = carDays[j].props.className;
-              if (!classes.includes('resDay') && !classes.includes('passDay')) {
-                if (carDays[j].props.children === d) {
-                  this.makeReservation(d, m, y);
-                }
-              }
+            const classes = carDays[j].props.className;
+            if (!classes.includes('resDay') && !classes.includes('passDay') && carDays[j].props.children === d) {
+              this.makeReservation(d, m, y);
+            }
+          }
+        }
+      }
+    } else if (endDate.length === 3 && endDate[2].length === 4 && book.end === '') {
+      const d = Number.parseInt(endDate[1], 10);
+      const m = Number.parseInt(endDate[0], 10) - 1;
+      const y = Number.parseInt(endDate[2], 10);
+      if ((d > 0 && d <= 31) && (m >= 0 && m <= 11) && (y >= 2020)) {
+        for (let i = 0; i < carousel[months[m]].length; i += 1) {
+          const carDays = carousel[months[m]][i].props.children;
+          for (let j = 0; j < carDays.length; j += 1) {
+            const classes = carDays[j].props.className;
+            if (!classes.includes('resDay') && !classes.includes('passDay') && carDays[j].props.children === d) {
+              this.makeReservation(d, m, y);
             }
           }
         }
@@ -345,7 +356,6 @@ Carousel.defaultProps = {
   setFees: () => null,
   setDates: () => null,
   handleBook: () => null,
-  setChange: () => null,
 };
 
 Carousel.propTypes = {
@@ -363,7 +373,6 @@ Carousel.propTypes = {
   setFees: PropTypes.func,
   setDates: PropTypes.func,
   handleBook: PropTypes.func,
-  setChange: PropTypes.func,
 };
 
 export default Carousel;

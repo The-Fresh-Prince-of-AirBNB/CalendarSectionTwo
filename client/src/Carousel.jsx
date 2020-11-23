@@ -260,26 +260,30 @@ class Carousel extends React.Component {
     return (
       <div style={{ overflow: 'hidden' }}>
         <div className={styles.moveButtonCont}>
-          {range === 0 ? (<div style={{ height: '32px', width: '32px' }}> </div>)
-            : (
-              <button
-                className={styles.moveButton}
-                onClick={() => this.changeDates('b')}
-                type="button"
-              >
-                &lt;
-              </button>
-            )}
-          {range === 10 ? ''
-            : (
-              <button
-                className={styles.moveButton}
-                onClick={() => this.changeDates('f')}
-                type="button"
-              >
-                &gt;
-              </button>
-            )}
+          <div>
+            {range === 0 ? (<div style={{ height: '32px', width: '32px' }}> </div>)
+              : (
+                <button
+                  className={styles.moveButton}
+                  onClick={() => this.changeDates('b')}
+                  type="button"
+                >
+                  &lt;
+                </button>
+              )}
+          </div>
+          <div style={{ marginLeft: '600px' }}>
+            {range === 10 ? ''
+              : (
+                <button
+                  className={styles.moveButton}
+                  onClick={() => this.changeDates('f')}
+                  type="button"
+                >
+                  &gt;
+                </button>
+              )}
+          </div>
         </div>
         <br />
         <div className={styles.carousel}>

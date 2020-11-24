@@ -105,7 +105,7 @@ class Carousel extends React.Component {
   }
 
   changeDates(dir) {
-    const { range, closeHeight, index } = this.state;
+    const { range } = this.state;
 
     if (dir === 'f') {
       this.setState({
@@ -116,8 +116,6 @@ class Carousel extends React.Component {
         range: range - 1,
       });
     }
-
-    // if (closeHeight[range] === 7 || closeHeight[range + 1] === 7)
   }
 
   generateCal(y, m, d, first, trail, lead) {
@@ -136,6 +134,7 @@ class Carousel extends React.Component {
     let daysAfterNextReservation = false;
     let daysBetween = false;
     let daysBefore = false;
+    let resAfterPrevious = false;
     if (d) {
       daysBefore = true;
     }
@@ -173,6 +172,9 @@ class Carousel extends React.Component {
         daysBefore = false;
         daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
         minDays[0] = true;
+        if (daysAfterNextReservation) {
+          resAfterPrevious = true;
+        }
       // the final booking
       } else if (d === i && trail) {
         daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={`${styles.day} ${styles.bookDay}`}>{i}</td>);
@@ -193,8 +195,8 @@ class Carousel extends React.Component {
           daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? `${styles.day} ${styles.calDay} ${styles.afterDay}` : `${styles.day} ${styles.calDay}`}>{i}</td>);
         }
       // else push non-available days
-      } else if (d <= i) {
-        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`} style={{ color: 'green' }}>{i}</td>);
+      } else if (i >= d && resAfterPrevious) {
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.calDay}`}>{i}</td>);
       } else {
         daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`}>{i}</td>);
       }

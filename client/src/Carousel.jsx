@@ -193,6 +193,8 @@ class Carousel extends React.Component {
           daysInTheMonth.push(<td key={key} role="presentation" onMouseDown={() => this.makeReservation(i, m, y)} className={daysUntilNextReservation ? `${styles.day} ${styles.calDay} ${styles.afterDay}` : `${styles.day} ${styles.calDay}`}>{i}</td>);
         }
       // else push non-available days
+      } else if (d <= i) {
+        daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`} style={{ color: 'green' }}>{i}</td>);
       } else {
         daysInTheMonth.push(<td key={key} className={`${styles.day} ${styles.resDay}`}>{i}</td>);
       }

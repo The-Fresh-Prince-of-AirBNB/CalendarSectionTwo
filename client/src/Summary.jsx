@@ -47,11 +47,11 @@ const Summary = (props) => {
           mousePosition(event);
           setHover(true);
         }}
-        // onMouseLeave={() => {
-        //   setHover(false);
-        //   setX(0);
-        //   setY(0);
-        // }}
+        onMouseLeave={() => {
+          setHover(false);
+          setX(0);
+          setY(0);
+        }}
         onClick={() => {
           bookReservation();
         }}

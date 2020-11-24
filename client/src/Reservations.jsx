@@ -1,35 +1,20 @@
 /* eslint-disable import/extensions */
-import React, { useState } from 'react';
-import Form from './Form.jsx';
+import React from 'react';
+import Box from './Box.jsx';
 import styles from '../../styles.css';
 
-const Reservations = () => {
-  const [fees, setFees] = useState(
-    {
-      nightlyFee: 0,
-      cleaningFee: 0,
-      serviceFee: 0,
-      taxes: 0,
-      minNights: 0,
-    },
-  );
-  const [dates, setDates] = useState({ reservations: {} });
-
-  return (
-    <div>
-      <div className={styles.box}>
-        <div className={styles.nightlyFee}>
-          <div style={{ display: 'inline', fontSize: '24px', fontWeight: '500' }}>
-            $
-            {' '}
-            {fees.nightlyFee}
-          </div>
-          <div style={{ display: 'inline' }}> / night</div>
-        </div>
-        <Form setFees={setFees} setDates={setDates} dates={dates} fees={fees} />
+const Reservations = () => (
+  <div>
+    <img className={styles.header} src="../dist/photos/airbnb_header.png" alt="header" />
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ width: '52%' }}>
+        <img className={styles.airbnbsummary} src="../dist/photos/airbnb_summary.png" alt="summary" />
+        <img className={styles.description} src="../dist/photos/airbnb_description.png" alt="description" />
+        <img className={styles.description} src="../dist/photos/airbnb_amenities.png" alt="amenities" />
       </div>
+      <Box />
     </div>
-  );
-};
+  </div>
+);
 
 export default Reservations;

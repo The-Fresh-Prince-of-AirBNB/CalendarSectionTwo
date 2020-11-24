@@ -18,6 +18,7 @@ class Carousel extends React.Component {
       checkIn: [],
       checkOut: [],
       range: 0,
+      closeHeight: [],
     };
     this.generateCal = this.generateCal.bind(this);
     this.changeDates = this.changeDates.bind(this);
@@ -104,7 +105,7 @@ class Carousel extends React.Component {
   }
 
   changeDates(dir) {
-    const { range } = this.state;
+    const { range, closeHeight, index } = this.state;
 
     if (dir === 'f') {
       this.setState({
@@ -115,11 +116,13 @@ class Carousel extends React.Component {
         range: range - 1,
       });
     }
+
+    // if (closeHeight[range] === 7 || closeHeight[range + 1] === 7)
   }
 
   generateCal(y, m, d, first, trail, lead) {
     const { dates, fees } = this.props;
-    const { checkIn, carousel } = this.state;
+    const { checkIn, carousel, closeHeight } = this.state;
     const res = dates.reservations[months[m]];
     // Create an array of the empty days on the first week of the month
     const emptyDays = [];
@@ -216,9 +219,12 @@ class Carousel extends React.Component {
     }
     const calendar = rows.map((r) => <tr>{r}</tr>);
     const newCarousel = carousel;
+    const newCloseHeight = closeHeight;
+    newCloseHeight.push(calendar.length);
     newCarousel[months[m]] = calendar;
     this.setState({
       carousel: newCarousel,
+      closeHeight: newCloseHeight,
     });
   }
 
@@ -268,15 +274,12 @@ class Carousel extends React.Component {
   render() {
     const { close } = this.props;
     const {
-      date, carousel, range,
+      date, carousel, range, closeHeight,
     } = this.state;
     const carArray = Object.values(carousel);
     let i = -1;
     const list = carArray.map(() => {
       i += 1;
-      // if (date[0] + i === 12) {
-      //   this.setState({ date: [0, date[1] + 1] });
-      // }
       return (
         <CalTable
           range={range}
@@ -325,7 +328,8 @@ class Carousel extends React.Component {
               overflow: 'hidden',
               marginLeft: `${-345 * range}px`,
               position: 'relative',
-              transition: 'all .3s ease',
+              transition: 'all .2s ease',
+              marginBottom: closeHeight[range] === 7 || closeHeight[range + 1] === 7 ? '25px' : '-5px',
             }
           }
           >

@@ -16,7 +16,7 @@ const Box = () => {
   const [dates, setDates] = useState({ reservations: {} });
 
   return (
-    <div className={styles.sticker} style={{ width: '22%' }}>
+    <div className={styles.sticker} style={{ width: '27.8%' }}>
       <div className={styles.box}>
         <div className={styles.nightlyFee}>
           <div style={{ display: 'inline', fontSize: '22px', fontWeight: '500' }}>

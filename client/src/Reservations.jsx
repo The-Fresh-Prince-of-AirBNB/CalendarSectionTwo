@@ -4,7 +4,7 @@ import Box from './Box.jsx';
 import styles from '../../styles.css';
 
 const Reservations = () => (
-  <div>
+  <div className={styles.container}>
     <img className={styles.header} src="https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/airbnb_header.png" alt="header" />
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <div style={{ width: '52%' }}>

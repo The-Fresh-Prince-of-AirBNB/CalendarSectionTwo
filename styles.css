@@ -4,6 +4,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.container {
+  width: 1128px;
+  margin: 0 auto;
+}
+
 /*
   Box Styling
   ==============================================
@@ -13,7 +18,6 @@ body {
   float: right;
   display: flex;
   flex-direction: column;
-  margin-right: 39%;
   margin-top: 48px;
   width: 100%;
   padding: 24px;
@@ -439,7 +443,7 @@ table {
 
 .header {
   width: 100%;
-  height: 580px;
+  height: 570px;
   margin: 0;
 }
 

@@ -20,8 +20,8 @@ const Form = ({
   const [hovering, setHover] = useState(false);
   const totalGuests = guests.adults + guests.children;
   const styling = {
-    hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d93275, #d93243, #d93275)' },
-    static: { backgroundImage: 'linear-gradient(to right, #d93243, #d93275, #d93275)' },
+    hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d4115c, #eb1044, #d4115c)' },
+    static: { backgroundImage: 'linear-gradient(to right, #d4113f, #d4115c, #d4115c)' },
   };
 
   const toggleCalendar = () => (

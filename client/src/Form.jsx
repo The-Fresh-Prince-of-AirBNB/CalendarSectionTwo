@@ -13,15 +13,15 @@ const Form = ({
   const [displayGuests, setDisplayGuests] = useState(false);
   const [form, setForm] = useState({ in: 'Add date', out: 'Add date', days: 0 });
   const [guestBorder, setGuestBorder] = useState(false);
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  const [x, setX] = useState(790);
+  const [y, setY] = useState(790);
   const [reserve, setReserve] = useState(false);
   const [guests, setGuest] = useState({ adults: 2, children: 0, infants: 0 });
   const [hovering, setHover] = useState(false);
   const totalGuests = guests.adults + guests.children;
   const styling = {
-    hover: { backgroundPosition: `${x + 60}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d4115c, #eb1044, #d4115c)' },
-    static: { backgroundImage: 'linear-gradient(to right, #d4113f, #d4115c, #d4115c)' },
+    hover: { backgroundPosition: `${x}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d4115c, #eb1044, #d4115c)' },
+    static: { backgroundPosition: '790px 520px', backgroundImage: 'linear-gradient(to right, #d4115c, #eb1044, #d4115c)' },
   };
 
   const toggleCalendar = () => (
@@ -142,8 +142,8 @@ const Form = ({
               }}
               onMouseLeave={() => {
                 setHover(false);
-                setX(0);
-                setY(0);
+                // setX(0);
+                // setY(0);
               }}
               onClick={() => toggleCalendar()}
             >

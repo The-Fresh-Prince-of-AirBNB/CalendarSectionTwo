@@ -20,7 +20,7 @@ const Form = ({
   const [hovering, setHover] = useState(false);
   const totalGuests = guests.adults + guests.children;
   const styling = {
-    hover: { backgroundPosition: `${x}px ${y}px`, backgroundImage: 'linear-gradient(to right, #d4115c, #eb1044, #d4115c)' },
+    hover: { backgroundPosition: `${x}px ${y}px`, backgroundImage: 'linear-gradient(to right, #eb1044, #d4115c, #eb1044)' },
     static: { backgroundPosition: '790px 520px', backgroundImage: 'linear-gradient(to right, #d4115c, #eb1044, #d4115c)' },
   };
 

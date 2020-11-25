@@ -42,8 +42,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css'],
   },
+  watch: true,
 };
-
-// '.css'
-
-// include: path.resolve(__dirname, 'client/src'),

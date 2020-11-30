@@ -5,7 +5,6 @@ import styles from '../../styles.css';
 
 const Reservations = () => (
   <div className={styles.container}>
-    {/* <img className={styles.header} src="https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/airbnb_header.png" alt="header" /> */}
     <picture>
       <source className={styles.header} srcSet="https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/airbnb_header.webp" type="image/webp" />
       <source className={styles.header} srcSet="https://airbnb-fec-reservations.s3-us-west-1.amazonaws.com/airbnb_header.jp2" type="image/jp2" />

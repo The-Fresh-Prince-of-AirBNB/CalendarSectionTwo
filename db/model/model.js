@@ -2,6 +2,8 @@
 const db = require('../mongo/db.js');
 const ListingModel = require('../mongo/schema.js');
 
+const months = [undefined, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 module.exports = {
   getOne: (id, callback) => {
     ListingModel.findOne({ id }, (err, results) => {
@@ -15,7 +17,10 @@ module.exports = {
   },
 
   makeReservation: (find, callback) => {
-    console.log(find, callback);
+    const start = find.in.split('/');
+    const end = find.out.split('/');
+    const dataStart = [Number.parseInt(start[2]), Number.parseInt(start[0]) - 1, Number.parseInt(start[1])]
+    console.log(dataStart, months[start[0]]);
   },
 
   addListing: (listing, i, callback) => {

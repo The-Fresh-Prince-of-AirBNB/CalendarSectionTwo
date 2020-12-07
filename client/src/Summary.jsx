@@ -32,8 +32,9 @@ const Summary = (props) => {
   const total = tots.nightly + Number.parseInt(fees.cleaningFee, 10) + tots.service + tots.taxes;
 
   const bookReservation = () => {
-    axios.post('/api/homes/21/reservation', {
-      days: 'testerrr',
+    axios.post(`${window.location.pathname}reservations`, {
+      in: form.in,
+      out: form.out,
     });
   };
 
